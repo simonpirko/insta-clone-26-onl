@@ -14,7 +14,7 @@ public class InMemoryUserStorage {
         users.computeIfAbsent(user.getUsername(), k -> user);
     }
 
-    public User findByUsername(String username) {
+    public static User findByUsername(String username) {
         User user = users.get(username);
         if (user == null) {
             throw new RuntimeException("User not found");
