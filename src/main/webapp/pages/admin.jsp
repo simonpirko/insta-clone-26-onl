@@ -12,6 +12,28 @@
     <title>Admin Page</title>
 </head>
 <body>
+<h1>Admin Page</h1>
 
+<table border="1">
+    <tr>
+        <th>Username</th>
+        <th>Password</th>
+        <th>Actions</th>
+    </tr>
+    <c:forEach var="user" items="${users}">
+        <tr>
+            <td>${user.username}</td>
+            <td>${user.password}</td>
+            <td>
+                <form method="post" action="/delete">
+                    <input type="hidden" name="username" value="${user.username}"/>
+                    <input type="submit" value="Delete"/>
+                </form>
+            </td>
+        </tr>
+    </c:forEach>
+</table>
+
+<a href="/logout">Logout</a>
 </body>
 </html>
