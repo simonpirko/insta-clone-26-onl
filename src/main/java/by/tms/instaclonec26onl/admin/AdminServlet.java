@@ -19,7 +19,7 @@ public class AdminServlet extends HttpServlet {
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("user");
         if (user instanceof Admin) {
-            // администратор авторизован
+            // админ авторизован
             req.setAttribute("users", storage.getAllUsers());
             req.getRequestDispatcher("/admin.jsp").forward(req, resp);
         } else {
