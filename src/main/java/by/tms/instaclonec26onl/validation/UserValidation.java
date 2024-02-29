@@ -27,6 +27,6 @@ public class UserValidation {
     }
     // Запрос поиска в InMemoryUserStorage
     private User findUserByUsername(String username) {
-        return inMemoryUserStorage.findByUsername(username);
+        return InMemoryUserStorage.findByUsername(username);
     }
 }
