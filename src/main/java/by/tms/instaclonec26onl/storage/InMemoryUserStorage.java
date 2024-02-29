@@ -10,11 +10,11 @@ import java.util.concurrent.ConcurrentHashMap;
 public class InMemoryUserStorage {
     private final static Map<String, User> users = new ConcurrentHashMap<>();
     // сохранение в Map
-    public void save(User user) {
+    public static void save(User user) {
         users.computeIfAbsent(user.getUsername(), k -> user);
     }
 
-    public User findByUsername(String username) {
+    public static User findByUsername(String username) {
         User user = users.get(username);
         if (user == null) {
             throw new RuntimeException("User not found");
