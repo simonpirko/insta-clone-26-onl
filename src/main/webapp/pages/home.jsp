@@ -11,9 +11,10 @@
     <a href="/profile">Hello</a>
 </c:if>
 
+TODO: сделать форму для логина
+
 <c:if test="${sessionScope.user == null}">
     <h1>Hello Guest!</h1>
-    <a href="/home">Home</a>
     <a href="/registration">Registration</a>
     <a href="/login">Login</a>
 </c:if>

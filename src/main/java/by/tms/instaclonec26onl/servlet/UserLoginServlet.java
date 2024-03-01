@@ -23,6 +23,7 @@ public class UserLoginServlet extends HttpServlet {
         InMemoryUserStorage storage = new InMemoryUserStorage();
         storage.save(new Admin("admin", "1234", storage));
     }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         getServletContext().
@@ -40,10 +41,10 @@ public class UserLoginServlet extends HttpServlet {
 
             req.getSession().setAttribute("user", byUsername);
 
-            resp.sendRedirect("/pages/home.jsp");
+            resp.sendRedirect("/pages/profile.jsp");
         } else {
             req.setAttribute("message", "Wrong password!");
-            getServletContext().getRequestDispatcher("/pages/login.jsp").forward(req, resp);
+            getServletContext().getRequestDispatcher("/home.jsp").forward(req, resp);
         }
     }
 }
