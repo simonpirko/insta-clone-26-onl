@@ -13,7 +13,6 @@ public class InMemoryUserStorage {
     public static void save(User user) {
         users.computeIfAbsent(user.getUsername(), k -> user);
     }
-
     public static User findByUsername(String username) {
         User user = users.get(username);
         if (user == null) {
@@ -21,7 +20,6 @@ public class InMemoryUserStorage {
         }
         return user;
     }
-
     public void delete(User user) {
     }
 }

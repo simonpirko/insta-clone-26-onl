@@ -39,7 +39,7 @@ public class RegistrationServlet extends HttpServlet {
             resp.sendRedirect("/profile");
         } catch (IllegalArgumentException e) {
             req.setAttribute("message", e.getMessage());
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/registration.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/home.jsp");
             dispatcher.forward(req, resp);
         }
     }
