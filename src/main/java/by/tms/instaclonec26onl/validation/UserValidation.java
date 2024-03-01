@@ -2,6 +2,7 @@ package by.tms.instaclonec26onl.validation;
 
 import by.tms.instaclonec26onl.model.User;
 import by.tms.instaclonec26onl.storage.InMemoryUserStorage;
+
 // Валидация юзера
 public class UserValidation {
     private final InMemoryUserStorage storage;

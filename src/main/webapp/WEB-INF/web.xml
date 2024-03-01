@@ -31,7 +31,7 @@
 
     <servlet>
         <servlet-name>HelloServlet</servlet-name>
-        <servlet-class>by.tms.instaclonec26onl.servlet.HelloServlet</servlet-class>
+        <servlet-class>by.tms.instaclonec26onl.servlet.HomeServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
