@@ -25,7 +25,7 @@ public class ProfileServlet extends HttpServlet {
         HttpSession session = req.getSession();
         User user = userService.getCurrentUser(req);
         session.setAttribute("user", user);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/profile.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/pages/profile.jsp");
         dispatcher.forward(req, resp);
     }
 }

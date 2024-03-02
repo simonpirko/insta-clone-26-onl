@@ -24,7 +24,7 @@ public class RegistrationServlet extends HttpServlet {
 
         if (name == null || username == null || password == null) {
             req.setAttribute("message", "All fields are required");
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/registration.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/pages/registration.jsp");
             dispatcher.forward(req, resp);
             return;
         }
@@ -37,10 +37,10 @@ public class RegistrationServlet extends HttpServlet {
         try {
             userService.add(user);
             req.getSession().setAttribute("user", user);
-            resp.sendRedirect("/profile");
+            resp.sendRedirect("/pages/profile");
         } catch (IllegalArgumentException e) {
             req.setAttribute("message", e.getMessage());
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/home.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/pages/home.jsp");
             dispatcher.forward(req, resp);
         }
     }
