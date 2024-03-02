@@ -11,10 +11,10 @@ public class User {
     private String name;
     private String username;
     private String password;
-    private String profilePictureUrl;
+    private String profilePicture;
 
     // Если любое поле null или пустая строка то бросаем IllegalArgumentException (добавил константу сообщения для проверки, кастомное исключение можно удалить)
-    public User(String name, String username, String password, String profilePictureUrl) {
+    public User(String name, String username, String password, String profilePicture) {
         this.validateField(name, "name", EMPTY_FIELD_MESSAGE);
         this.validateField(username, "username", EMPTY_FIELD_MESSAGE);
         this.validateField(password, "password", EMPTY_FIELD_MESSAGE);
@@ -22,7 +22,7 @@ public class User {
         this.name = name;
         this.username = username;
         this.password = password;
-        this.profilePictureUrl = profilePictureUrl;
+        this.profilePicture = profilePicture;
     }
 
     private void validateField(String field, String fieldName, String errorMessage) {

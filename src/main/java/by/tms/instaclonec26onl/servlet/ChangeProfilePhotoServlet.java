@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
-@WebServlet("/change-creds")
+@WebServlet("/change-profile-photo")
 public class ChangeProfilePhotoServlet extends HttpServlet {
 
     private final InMemoryUserStorage storage = new InMemoryUserStorage();
@@ -49,7 +49,7 @@ public class ChangeProfilePhotoServlet extends HttpServlet {
                         String username = req.getParameter("username");
                         User user = storage.findByUsername(username);
 
-                        user.setProfilePictureUrl(filePath);
+                        user.setProfilePicture(filePath);
                         storage.save(user);
                     }
                 }
