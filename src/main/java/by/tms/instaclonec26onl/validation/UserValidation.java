@@ -2,12 +2,12 @@ package by.tms.instaclonec26onl.validation;
 
 import by.tms.instaclonec26onl.model.User;
 import by.tms.instaclonec26onl.storage.InMemoryUserStorage;
-// Валидация юзера
-public class UserValidation {
-    private final InMemoryUserStorage inMemoryUserStorage;
 
-    public UserValidation(InMemoryUserStorage inMemoryUserStorage) {
-        this.inMemoryUserStorage = inMemoryUserStorage;
+public class UserValidation {
+    private final InMemoryUserStorage userStorage;
+
+    public UserValidation(InMemoryUserStorage userStorage) {
+        this.userStorage = userStorage;
     }
 
     public boolean validateUser(String username, String password) {
@@ -25,8 +25,8 @@ public class UserValidation {
         // Проверка пароля по equals
         return user.getPassword().equals(password);
     }
-    // Запрос поиска в InMemoryUserStorage
+
     private User findUserByUsername(String username) {
-        return InMemoryUserStorage.findByUsername(username);
+        return userStorage.findByUsername(username);
     }
 }
