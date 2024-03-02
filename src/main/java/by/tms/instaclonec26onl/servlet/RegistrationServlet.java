@@ -20,6 +20,7 @@ public class RegistrationServlet extends HttpServlet {
         String name = req.getParameter("name");
         String username = req.getParameter("username");
         String password = req.getParameter("password");
+        String profilePictureUrl = ""; // Создана дефолтная пустая строка для URL
 
         if (name == null || username == null || password == null) {
             req.setAttribute("message", "All fields are required");
@@ -28,7 +29,7 @@ public class RegistrationServlet extends HttpServlet {
             return;
         }
 
-        User user = new User(name, username, password);
+        User user = new User(name, username, password, profilePictureUrl);
         user.setName(name);
         user.setUsername(username);
         user.setPassword(password);

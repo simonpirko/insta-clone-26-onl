@@ -26,13 +26,15 @@ public class ChangeCredsServlet extends HttpServlet {
         String newUsername = req.getParameter("new-username");
         String password = req.getParameter("password");
         String newPassword = req.getParameter("new-password");
+        String profilePicture = req.getParameter("profile-picture"); // Добавлена фотка профиля
 
         User user = storage.findByUsername(username);
         if (user != null && user.getPassword().equals(password)) {
             user.setUsername(newUsername);
             user.setPassword(newPassword);
+            user.setProfilePictureUrl(profilePicture);
             storage.save(user);
-            resp.sendRedirect("/login.jsp");
+            resp.sendRedirect("/profile");
         } else {
             req.setAttribute("error", "Invalid username or password");
             req.getRequestDispatcher("/change-creds.jsp").forward(req, resp);

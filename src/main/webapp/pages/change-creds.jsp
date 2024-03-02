@@ -14,7 +14,7 @@
     <title>Change Credentials</title>
 </head>
 <body>
-<h1>Change Username/Password</h1>
+<h1>Change Username/Password/Profile Photo</h1>
 
 <form method="post" action="/change-credentials">
     <label for="username">Username:</label>
@@ -31,6 +31,13 @@
 <c:if test="${not empty error}">
     <p>${error}</p>
 </c:if>
+
+<h1>Change Profile Picture</h1>
+<form action="/change-picture" method="post" enctype="multipart/form-data">
+    <input type="file" name="profile-picture" />
+    <input type="hidden" name="username" value="${user.username}" />
+    <button type="submit">Change Profile Picture</button>
+</form>
 
 <a href="/home">Back to Home Page</a>
 </body>
