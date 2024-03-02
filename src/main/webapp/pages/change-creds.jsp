@@ -32,8 +32,8 @@
     <p>${error}</p>
 </c:if>
 
-<h1>Change Profile Picture</h1>
-<form action="/change-picture" method="post" enctype="multipart/form-data">
+<h2>Change Profile Picture</h2>
+<form action="/change-profile-photo" method="post" enctype="multipart/form-data">
     <input type="file" name="profile-picture" />
     <input type="hidden" name="username" value="${user.username}" />
     <button type="submit">Change Profile Picture</button>
