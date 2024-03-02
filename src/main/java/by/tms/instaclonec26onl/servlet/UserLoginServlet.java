@@ -12,27 +12,28 @@ import java.io.IOException;
 
 @WebServlet("/login")
 public class UserLoginServlet extends HttpServlet {
-    private final UserService userService = new UserService();
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        getServletContext().
-                getRequestDispatcher("/registration.jsp").
-                forward(req, resp);
-    }
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String username = req.getParameter("username");
-        String password = req.getParameter("password");
+	private final UserService userService = new UserService();
 
-        User byUsername = userService.findByUsername(username);
-        if (byUsername.getPassword().equals(password)) {
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		getServletContext().
+				getRequestDispatcher("/registration.jsp").
+				forward(req, resp);
+	}
 
-            req.getSession().setAttribute("user", byUsername);
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String username = req.getParameter("username");
+		String password = req.getParameter("password");
 
-            resp.sendRedirect("/profile.jsp");
-        } else {
-            req.setAttribute("message", "Wrong password!");
-            getServletContext().getRequestDispatcher("/home.jsp").forward(req, resp);
-        }
-    }
+		User byUsername = userService.findByUsername(username);
+		if (byUsername.getPassword().equals(password)) {
+
+			req.getSession().setAttribute("user", byUsername);
+			resp.sendRedirect("/pages/profile.jsp");
+		} else {
+			req.setAttribute("message", "Wrong password!");
+			getServletContext().getRequestDispatcher("/home.jsp").forward(req, resp);
+		}
+	}
 }

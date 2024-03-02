@@ -3,11 +3,12 @@ package by.tms.instaclonec26onl.validation;
 import by.tms.instaclonec26onl.model.User;
 import by.tms.instaclonec26onl.storage.InMemoryUserStorage;
 
+// Валидация юзера
 public class UserValidation {
-    private final InMemoryUserStorage userStorage;
+    private final InMemoryUserStorage storage;
 
-    public UserValidation(InMemoryUserStorage userStorage) {
-        this.userStorage = userStorage;
+    public UserValidation(InMemoryUserStorage inMemoryUserStorage) {
+        this.storage = inMemoryUserStorage;
     }
 
     public boolean validateUser(String username, String password) {
@@ -27,6 +28,6 @@ public class UserValidation {
     }
 
     private User findUserByUsername(String username) {
-        return userStorage.findByUsername(username);
+        return InMemoryUserStorage.findByUsername(username);
     }
 }

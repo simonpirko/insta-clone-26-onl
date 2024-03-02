@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 // Изменение имени и пароля (смену аватарки - позже)
-@WebServlet("/change-creds")
+@WebServlet("/change-creds-1")
 public class ChangeCredsServlet extends HttpServlet {
 
     private InMemoryUserStorage storage;

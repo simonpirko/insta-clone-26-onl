@@ -17,7 +17,7 @@ public class UserService {
 
     // Поиск юзера в сторэдже по никнейму
     public User findByUsername(String username)  {
-        return storage.findByUsername(username);
+        return InMemoryUserStorage.findByUsername(username);
     }
 
     // Проверка сессии
