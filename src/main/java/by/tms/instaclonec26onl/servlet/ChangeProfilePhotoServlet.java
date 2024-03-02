@@ -54,7 +54,7 @@ public class ChangeProfilePhotoServlet extends HttpServlet {
                     }
                 }
             }
-            resp.sendRedirect("/profile");
+            resp.sendRedirect("/pages/profile");
         } catch (Exception e) {
             throw new ServletException(e);
         }

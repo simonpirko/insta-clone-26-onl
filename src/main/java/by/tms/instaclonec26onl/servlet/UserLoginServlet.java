@@ -17,7 +17,7 @@ public class UserLoginServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		getServletContext().
-				getRequestDispatcher("/registration.jsp").
+				getRequestDispatcher("/pages/login.jsp").
 				forward(req, resp);
 	}
 
@@ -33,7 +33,7 @@ public class UserLoginServlet extends HttpServlet {
 			resp.sendRedirect("/pages/profile.jsp");
 		} else {
 			req.setAttribute("message", "Wrong password!");
-			getServletContext().getRequestDispatcher("/home.jsp").forward(req, resp);
+			getServletContext().getRequestDispatcher("/pages/home.jsp").forward(req, resp);
 		}
 	}
 }
