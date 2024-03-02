@@ -1,22 +1,21 @@
 package by.tms.instaclonec26onl.model;
 
-import lombok.ToString;
-
 import java.util.ArrayList;
 import java.util.List;
+import lombok.ToString;
 
 @ToString
 public class UserBio extends User{
 
     private List<String> bio;
 
-    public UserBio(String name, String username, String password, List<String> bio) {
-        super(name, username, password);
+    public UserBio(String name, String username, String password, List<String> bio, String profilePictureUrl) {
+        super(name, username, password, profilePictureUrl);
         this.bio = bio;
     }
-    //Поле bio инициализируем пустым списком в пустом конструкторе. Но всё равно ошибка, хз почему. Вот такие пироги...
-    public UserBio(String name, String username, String password) {
-        super(name, username, password);
+    //Поле bio инициализируем пустым списком в пустом конструкторе. Вот такие пироги...
+    public UserBio(String name, String username, String password, String profilePictureUrl) {
+        super(name, username, password, profilePictureUrl);
         this.bio = new ArrayList<>();
     }
 }
