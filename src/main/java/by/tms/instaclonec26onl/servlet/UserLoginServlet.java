@@ -17,7 +17,7 @@ public class UserLoginServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		getServletContext().
-				getRequestDispatcher("/pages/registration.jsp").
+				getRequestDispatcher("/pages/login.jsp").
 				forward(req, resp);
 	}
 
