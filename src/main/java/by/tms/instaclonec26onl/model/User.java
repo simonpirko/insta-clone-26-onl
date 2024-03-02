@@ -1,63 +1,33 @@
 package by.tms.instaclonec26onl.model;
 
-import java.util.List;
+import lombok.Data;
+import lombok.ToString;
 
-// TODO:
+@Data
+@ToString
 public class User {
+    private static final String EMPTY_FIELD_MESSAGE = "Реклама пива запрещена, поэтому её здесь нет";
+
     private String name;
     private String username;
     private String password;
-    private List<String> bio;
+    private String profilePicture;
 
-    public User(String username, String password) {}
+    // Если любое поле null или пустая строка то бросаем IllegalArgumentException (добавил константу сообщения для проверки, кастомное исключение можно удалить)
+    public User(String name, String username, String password, String profilePicture) {
+        this.validateField(name, "name", EMPTY_FIELD_MESSAGE);
+        this.validateField(username, "username", EMPTY_FIELD_MESSAGE);
+        this.validateField(password, "password", EMPTY_FIELD_MESSAGE);
 
-    public User(String name, String username, String password, List<String> bio) {
         this.name = name;
         this.username = username;
         this.password = password;
-        this.bio = bio;
+        this.profilePicture = profilePicture;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public List<String> getBio() {
-        return bio;
-    }
-
-    public void setBio(List<String> bio) {
-        this.bio = bio;
-    }
-
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "name='" + name + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", bio='" + bio + '\'' +
-                '}';
+    private void validateField(String field, String fieldName, String errorMessage) {
+        if (field == null || field.isEmpty()) {
+            throw new IllegalArgumentException(errorMessage);
+        }
     }
 }

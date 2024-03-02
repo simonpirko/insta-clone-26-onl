@@ -7,11 +7,11 @@
 <body>
 <div class="profile-page">
     <div class="profile-header">
-        <img src="<%= user.getProfilePicture() %>" alt="Profile picture" class="profile-picture">
+        <img src="${user.profilePictureUrl}" alt="Profile picture" class="profile-picture">
         <div class="profile-info">
-            <h1><%= user.getName() %></h1>
-            <p><%= user.getBio() %></p>
-            <a href="<%= user.getWebsite() %>" target="_blank"><%= user.getWebsite() %></a>
+            <h1>${user.name}</h1>
+            <p>${user.bio}</p>
+            <a href="${user.website}" target="_blank">${user.website}</a>
         </div>
     </div>
 </div>

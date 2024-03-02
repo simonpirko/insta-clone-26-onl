@@ -1,16 +1,21 @@
 package by.tms.instaclonec26onl.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.ToString;
 
-import java.util.List;
 @ToString
-public class UserBio extends User {
+public class UserBio extends User{
+
     private List<String> bio;
 
-    public UserBio(String name, String username, String password, List<String> bio) {
-        super(name, username, password);
+    public UserBio(String name, String username, String password, List<String> bio, String profilePictureUrl) {
+        super(name, username, password, profilePictureUrl);
         this.bio = bio;
+    }
+    //Поле bio инициализируем пустым списком в пустом конструкторе. Вот такие пироги...
+    public UserBio(String name, String username, String password, String profilePictureUrl) {
+        super(name, username, password, profilePictureUrl);
+        this.bio = new ArrayList<>();
     }
 }

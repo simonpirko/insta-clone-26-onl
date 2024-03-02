@@ -26,7 +26,7 @@ public class UserValidation {
         // Проверка пароля по equals
         return user.getPassword().equals(password);
     }
-    // Запрос поиска в InMemoryUserStorage
+
     private User findUserByUsername(String username) {
         return InMemoryUserStorage.findByUsername(username);
     }

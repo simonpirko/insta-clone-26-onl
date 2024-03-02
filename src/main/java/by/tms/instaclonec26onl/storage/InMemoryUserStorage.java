@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class InMemoryUserStorage {
     private final static Map<String, User> users = new ConcurrentHashMap<>();
     // сохранение в Map
-    public void save(User user) {
+    public static void save(User user) {
         users.computeIfAbsent(user.getUsername(), k -> user);
     }
 
@@ -21,7 +21,6 @@ public class InMemoryUserStorage {
         }
         return user;
     }
-
     public void delete(User user) {
     }
 }

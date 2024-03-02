@@ -14,14 +14,13 @@ import java.io.IOException;
 // Сервлет регистрации новой учётки
 @WebServlet("/registration")
 public class RegistrationServlet extends HttpServlet {
-
     private final UserService userService = new UserService();
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("name");
         String username = req.getParameter("username");
         String password = req.getParameter("password");
+        String profilePictureUrl = ""; // Создана дефолтная пустая строка для URL
 
         if (name == null || username == null || password == null) {
             req.setAttribute("message", "All fields are required");
@@ -30,7 +29,7 @@ public class RegistrationServlet extends HttpServlet {
             return;
         }
 
-        User user = new User(username, password);
+        User user = new User(name, username, password, profilePictureUrl);
         user.setName(name);
         user.setUsername(username);
         user.setPassword(password);
@@ -38,10 +37,10 @@ public class RegistrationServlet extends HttpServlet {
         try {
             userService.add(user);
             req.getSession().setAttribute("user", user);
-            resp.sendRedirect("/home");
+            resp.sendRedirect("/profile");
         } catch (IllegalArgumentException e) {
             req.setAttribute("message", e.getMessage());
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/registration.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/home.jsp");
             dispatcher.forward(req, resp);
         }
     }
