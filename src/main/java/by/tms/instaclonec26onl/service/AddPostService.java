@@ -11,6 +11,10 @@ public class AddPostService {
         inMemoryPostStorage.save(userPost);
     }
 
+    public InMemoryPostStorage inMemoryPostStorage () {
+        return inMemoryPostStorage;
+    }
+
     public void removePost (UserPost userPost){
         inMemoryPostStorage.delete(userPost);
     }
