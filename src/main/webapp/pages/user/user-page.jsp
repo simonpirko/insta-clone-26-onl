@@ -16,5 +16,9 @@
     <input type="hidden" name="username" value="${username.username}">
     <button>sub</button>
 </form>
+<form action="subscription" method="get">
+    <input type="hidden" name="subscription" value="${username.username}">
+    <button>subscription</button>
+</form>
 </body>
 </html>

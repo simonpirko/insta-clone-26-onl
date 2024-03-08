@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 
 // Сервлет регистрации новой учётки
 @WebServlet("/registration")
@@ -35,7 +36,7 @@ public class RegistrationServlet extends HttpServlet {
             return;
         }
 
-        User user = new User(name, username, password, profilePictureUrl);
+        User user = new User(name, username, password, profilePictureUrl,new ArrayList<>(),new ArrayList<>());
         user.setName(name);
         user.setUsername(username);
         user.setPassword(password);

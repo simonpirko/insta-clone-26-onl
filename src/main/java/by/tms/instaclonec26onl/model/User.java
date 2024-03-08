@@ -3,6 +3,8 @@ package by.tms.instaclonec26onl.model;
 import lombok.Data;
 import lombok.ToString;
 
+import java.util.List;
+
 @Data
 @ToString
 public class User {
@@ -12,9 +14,12 @@ public class User {
     private String username;
     private String password;
     private String profilePicture;
+    private List<User> subscription;
+    private List<User> followers;
 
     // Если любое поле null или пустая строка то бросаем IllegalArgumentException (добавил константу сообщения для проверки, кастомное исключение можно удалить)
-    public User(String name, String username, String password, String profilePicture) {
+
+    public User(String name, String username, String password, String profilePicture, List<User> subscription, List<User> followers) {
         this.validateField(name, "name", EMPTY_FIELD_MESSAGE);
         this.validateField(username, "username", EMPTY_FIELD_MESSAGE);
         this.validateField(password, "password", EMPTY_FIELD_MESSAGE);
@@ -23,6 +28,8 @@ public class User {
         this.username = username;
         this.password = password;
         this.profilePicture = profilePicture;
+        this.subscription = subscription;
+        this.followers = followers;
     }
 
     private void validateField(String field, String fieldName, String errorMessage) {

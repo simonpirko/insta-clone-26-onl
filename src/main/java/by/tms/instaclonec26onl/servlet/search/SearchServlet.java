@@ -17,12 +17,14 @@ public class SearchServlet extends HttpServlet {
     private final UserService userService = new UserService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User user = new User("ilia","lil","qwe","");
-        User user1 = new User("ilia","lil1","qwe","");
-        User user2 = new User("ilia","lil2","qwe","");
+        User user = new User("ilia","lil","qwe","",new ArrayList<>(),new ArrayList<>());
+        User user1 = new User("ilia","lil1","qwe","",new ArrayList<>(),new ArrayList<>());
+        User user2 = new User("ilia","lil2","qwe","",new ArrayList<>(),new ArrayList<>());
         userService.add(user);
         userService.add(user1);
         userService.add(user2);
+        user.getSubscription().add(user1);
+        user.getSubscription().add(user2);
         List<String> username = userService.findAllUsername();
         req.setAttribute("allUser", username);
         getServletContext().getRequestDispatcher("/pages/search/search.jsp").forward(req, resp);
