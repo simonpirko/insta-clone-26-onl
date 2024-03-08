@@ -1,4 +1,4 @@
-package by.tms.instaclonec26onl.servlet.search;
+package by.tms.instaclonec26onl.servlet.userpage;
 
 import by.tms.instaclonec26onl.model.User;
 import by.tms.instaclonec26onl.service.UserService;
@@ -12,13 +12,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet("/search")
-public class SearchServlet extends HttpServlet {
+@WebServlet("/follower")
+public class UserFollowerServlet extends HttpServlet {
     private final UserService userService = new UserService();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<String> username = userService.findAllUsername();
-        req.setAttribute("allUser", username);
-        getServletContext().getRequestDispatcher("/pages/search/search.jsp").forward(req, resp);
+        List<String> followersName = new ArrayList<>();
+        String userName = req.getParameter("followers");
+        User user = userService.findByUsername(userName);
+        for (User users : user.getFollowers()) {
+            followersName.add(users.getUsername());
+        }
+        req.setAttribute("followers", followersName);
+        getServletContext().getRequestDispatcher("/pages/user/user-followers.jsp").forward(req, resp);
     }
 }
+
