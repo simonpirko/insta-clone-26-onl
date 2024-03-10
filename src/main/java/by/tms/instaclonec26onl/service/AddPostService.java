@@ -1,13 +1,13 @@
 package by.tms.instaclonec26onl.service;
 
-import by.tms.instaclonec26onl.model.UserPost;
+import by.tms.instaclonec26onl.model.User;
 import by.tms.instaclonec26onl.storage.InMemoryPostStorage;
 
 public class AddPostService {
 
     InMemoryPostStorage inMemoryPostStorage = new InMemoryPostStorage();
 
-    public void addPost (UserPost userPost){
+    public void addPost (User userPost){
         inMemoryPostStorage.save(userPost);
     }
 
@@ -15,7 +15,7 @@ public class AddPostService {
         return inMemoryPostStorage;
     }
 
-    public void removePost (UserPost userPost){
+    public void removePost (User userPost){
         inMemoryPostStorage.delete(userPost);
     }
 

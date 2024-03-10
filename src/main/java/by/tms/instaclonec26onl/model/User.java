@@ -12,6 +12,11 @@ public class User {
     private String username;
     private String password;
     private String profilePicture;
+    private String textPost;
+    private byte[] imagePost;
+
+    public User() {
+    }
 
     // Если любое поле null или пустая строка то бросаем IllegalArgumentException (добавил константу сообщения для проверки, кастомное исключение можно удалить)
     public User(String name, String username, String password, String profilePicture) {
