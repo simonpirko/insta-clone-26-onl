@@ -9,13 +9,14 @@ public class UserBio extends User{
 
     private List<String> bio;
 
-    public UserBio(String name, String username, String password, List<String> bio, String profilePictureUrl) {
-        super(name, username, password, profilePictureUrl);
-        this.bio = bio;
-    }
+//    public UserBio(String name, String username, String password, List<String> bio, String profilePictureUrl) {
+//        super(name, username, password, profilePictureUrl);
+//        this.bio = bio;
+//    }
     //Поле bio инициализируем пустым списком в пустом конструкторе. Вот такие пироги...
-    public UserBio(String name, String username, String password, String profilePictureUrl) {
-        super(name, username, password, profilePictureUrl);
+
+    public UserBio(String name, String username, String password, String profilePicture, List<User> subscription, List<User> followers, List<String> bio) {
+        super(name, username, password, profilePicture, subscription, followers);
         this.bio = new ArrayList<>();
     }
 }
