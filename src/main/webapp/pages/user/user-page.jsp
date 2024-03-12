@@ -17,11 +17,11 @@
     <button>sub</button>
 </form>
 <form action="subscription" method="get">
-    <input type="hidden" name="subscription" value="${username.username}">
+    <input type="hidden" name="username" value="${username.username}">
     <button>subscription</button>
 </form>
 <form action="follower" method="get">
-    <input type="hidden" name="followers" value="${username.username}">
+    <input type="hidden" name="username" value="${username.username}">
     <button>followers</button>
 </form>
 </body>

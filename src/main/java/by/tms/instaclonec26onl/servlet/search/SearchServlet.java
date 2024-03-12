@@ -17,6 +17,12 @@ public class SearchServlet extends HttpServlet {
     private final UserService userService = new UserService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        User user = new User("ilia","lil","qwe","",new ArrayList<>(),new ArrayList<>());
+        userService.add(user);
+
+        User user1 = new User("ilia","lil1","qwi","",new ArrayList<>(),new ArrayList<>());
+        userService.add(user1);
+        user.getSubscription().add(user1);
         List<String> username = userService.findAllUsername();
         req.setAttribute("allUser", username);
         getServletContext().getRequestDispatcher("/pages/search/search.jsp").forward(req, resp);
