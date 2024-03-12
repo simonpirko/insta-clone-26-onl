@@ -20,10 +20,7 @@ public class UserSubscriptionServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username =  req.getParameter("username");
         User subscription = userService.findByUsername(username);
-        req.setAttribute("subscriptions", subscription.getSubscription()
-                                                         .stream()
-                                                         .map(User ::getUsername)
-                                                         .toList());
+        req.setAttribute("subscriptions", subscription.getSubscription());
 
         getServletContext().getRequestDispatcher("/pages/user/user-subscription.jsp").forward(req,resp);
     }

@@ -20,10 +20,7 @@ public class UserFollowerServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String userName = req.getParameter("username");
         User user = userService.findByUsername(userName);
-        req.setAttribute("followers", user.getFollowers()
-                                             .stream()
-                                             .map(User::getUsername)
-                                             .toList());
+        req.setAttribute("followers", user.getFollowers());
 
         getServletContext().getRequestDispatcher("/pages/user/user-followers.jsp").forward(req, resp);
     }

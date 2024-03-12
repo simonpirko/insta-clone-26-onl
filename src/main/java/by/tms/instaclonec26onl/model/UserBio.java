@@ -15,7 +15,7 @@ public class UserBio extends User{
 //    }
     //Поле bio инициализируем пустым списком в пустом конструкторе. Вот такие пироги...
 
-    public UserBio(String name, String username, String password, String profilePicture, List<User> subscription, List<User> followers, List<String> bio) {
+    public UserBio(String name, String username, String password, String profilePicture, List<String> subscription, List<String> followers, List<String> bio) {
         super(name, username, password, profilePicture, subscription, followers);
         this.bio = new ArrayList<>();
     }
