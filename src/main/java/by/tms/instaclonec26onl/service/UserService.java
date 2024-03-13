@@ -6,6 +6,7 @@ import by.tms.instaclonec26onl.storage.InMemoryUserStorage;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 public class UserService {
     private final InMemoryUserStorage storage = new InMemoryUserStorage();
@@ -28,5 +29,8 @@ public class UserService {
             throw new UserNotFoundException("User not found in session");
         }
         return user;
+    }
+    public List<String> findAllUsername() {
+        return storage.findAllUsername();
     }
 }

@@ -5,15 +5,9 @@
     <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
-<div class="profile-page">
-    <div class="profile-header">
-        <img src="${user.profilePictureUrl}" alt="Profile picture" class="profile-picture">
-        <div class="profile-info">
-            <h1>${user.name}</h1>
-            <p>${user.bio}</p>
-            <a href="${user.website}" target="_blank">${user.website}</a>
-        </div>
-    </div>
-</div>
+<h1>${user.name}</h1>
+<a href="/friend">Friends</a>
+<br>
+<a href="/search">Search</a>
 </body>
 </html>
