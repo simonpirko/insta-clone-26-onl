@@ -4,6 +4,8 @@ import by.tms.instaclonec26onl.model.User;
 import by.tms.instaclonec26onl.model.UserPost;
 import by.tms.instaclonec26onl.service.AddPostService;
 import by.tms.instaclonec26onl.service.ImageUtil;
+import lombok.SneakyThrows;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -23,11 +25,12 @@ public class AddPostServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/pages/addPost.jsp").forward(req,resp);
+        req.getRequestDispatcher("/pages/addPost/addPost.jsp").forward(req,resp);
     }
 
+    @SneakyThrows
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
 
         String textPost = req.getParameter("text");
         Part part = req.getPart("image");
@@ -40,8 +43,9 @@ public class AddPostServlet extends HttpServlet {
         //addPostService.addPost(userPost);
         addPostService.addPostDB(userPost);
 
-        req.setAttribute("post", addPostService.inMemoryPostStorage().getPost());
-        req.getRequestDispatcher("/pages/newPost.jsp").forward(req,resp);
+        //req.setAttribute("post", addPostService.inMemoryPostStorage().getPost());
+        req.setAttribute("post", addPostService.findAllPost());
+        req.getRequestDispatcher("/pages/addPost/addPost.jsp").forward(req,resp);
 
     }
 }

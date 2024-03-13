@@ -1,3 +1,5 @@
+<%@ page import="by.tms.instaclonec26onl.model.User" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
@@ -22,7 +24,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="addPost" method="post" enctype="multipart/form-data">
+                <form action="" method="post" enctype="multipart/form-data">
                     <input type="file" name="image" id="photoInput">
                     <input type="text" name="text">
                     <input type="submit" value="Загрузить">
@@ -31,6 +33,26 @@
         </div>
     </div>
 </div>
+
+<%
+    List<User> userList = (List<User>) request.getAttribute("post");
+
+    if(!(userList == null)){
+        userList.reversed();
+        for (User entry: userList) {
+            byte[] imageData = entry.getUserPost().getImagePost();
+            String postText = entry.getUserPost().getTextPost();
+
+%>
+<div class="text-center mt-3">
+    <img src="data:image/jpeg;base64,<%= new String(java.util.Base64.getEncoder().encode(imageData)) %>"
+         class="img-fluid" width="30%" height="40%" alt="">
+    <h4 class="mt-3"><%= postText %></h4>
+</div>
+<%
+        }
+    }
+%>
 
 </body>
 </html>

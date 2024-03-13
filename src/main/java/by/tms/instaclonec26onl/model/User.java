@@ -16,6 +16,12 @@ public class User {
     private String profilePicture;
     private List<User> subscription;
     private List<User> followers;
+    private UserPost userPost;
+
+    public User(UserPost userPost) {
+        this.userPost = userPost;
+    }
+
 
     // Если любое поле null или пустая строка то бросаем IllegalArgumentException (добавил константу сообщения для проверки, кастомное исключение можно удалить)
 
