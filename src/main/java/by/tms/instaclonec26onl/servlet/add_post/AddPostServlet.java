@@ -1,6 +1,7 @@
-package by.tms.instaclonec26onl.servlet;
+package by.tms.instaclonec26onl.servlet.add_post;
 
 import by.tms.instaclonec26onl.model.User;
+import by.tms.instaclonec26onl.model.UserPost;
 import by.tms.instaclonec26onl.service.AddPostService;
 import by.tms.instaclonec26onl.service.ImageUtil;
 import javax.servlet.ServletException;
@@ -33,10 +34,11 @@ public class AddPostServlet extends HttpServlet {
 
         byte[] postImgByte = ImageUtil.convertToByteArray(part.getInputStream());
 
-        User userPost = new User();
+        UserPost userPost = new UserPost();
         userPost.setTextPost(textPost);
         userPost.setImagePost(postImgByte);
-        addPostService.addPost(userPost);
+        //addPostService.addPost(userPost);
+        addPostService.addPostDB(userPost);
 
         req.setAttribute("post", addPostService.inMemoryPostStorage().getPost());
         req.getRequestDispatcher("/pages/newPost.jsp").forward(req,resp);
