@@ -44,7 +44,7 @@ public class RegistrationServlet extends HttpServlet {
         try {
             userService.add(user);
             req.getSession().setAttribute("user", user);
-            resp.sendRedirect("/pages/profile.jsp");
+            resp.sendRedirect("/profile");
         } catch (IllegalArgumentException e) {
             req.setAttribute("message", e.getMessage());
             RequestDispatcher dispatcher = req.getRequestDispatcher("/pages/home.jsp");

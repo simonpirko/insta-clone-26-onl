@@ -35,7 +35,7 @@ public class InMemoryPostStorage {
 
     }
 
-    public List<UserPost> findAllPostUser() throws SQLException {
+    public List<UserPost> findAllPostUser(User user) throws SQLException {
         Connection connection =
                 DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "root");
 
@@ -45,10 +45,12 @@ public class InMemoryPostStorage {
         List<UserPost> posts = new ArrayList<>();
 
         while (resultSet.next()) {
-            byte[] byteImage = resultSet.getBytes(2);
-            String textPost = resultSet.getString(3);
-            long idPost = resultSet.getLong(1);
-            posts.add(new UserPost(idPost, textPost, byteImage));
+            if (user.getId().equals(resultSet.getLong(4))) {
+                byte[] byteImage = resultSet.getBytes(2);
+                String textPost = resultSet.getString(3);
+                long idPost = resultSet.getLong(1);
+                posts.add(new UserPost(idPost, textPost, byteImage));
+            }
         }
 
         resultSet.close();

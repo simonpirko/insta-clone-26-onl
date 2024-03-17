@@ -15,8 +15,8 @@ public class AddPostService {
         inMemoryPostStorage.save_DB(userPost);
     }
 
-    public List<UserPost> findAllPost () throws SQLException {
-        return inMemoryPostStorage().findAllPostUser();
+    public List<UserPost> findAllPost (User user) throws SQLException {
+        return inMemoryPostStorage().findAllPostUser(user);
     }
     public InMemoryPostStorage inMemoryPostStorage () {
         return inMemoryPostStorage;

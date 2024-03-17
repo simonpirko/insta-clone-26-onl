@@ -33,20 +33,6 @@ public class ProfileServlet extends HttpServlet {
     @SneakyThrows
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String textPost = req.getParameter("text");
-        Part part = req.getPart("image");
 
-        byte[] postImgByte = ImageUtil.convertToByteArray(part.getInputStream());
-
-        UserPost userPost = new UserPost();
-        userPost.setTextPost(textPost);
-        userPost.setImagePost(postImgByte);
-        userPost.getUser().setId(2L);
-
-        addPostService.addPostDB(userPost);
-
-        //req.setAttribute("post", addPostService.inMemoryPostStorage().getPost());
-        req.setAttribute("post", addPostService.findAllPost());
-        req.getRequestDispatcher("/pages/addPost/addPost.jsp").forward(req,resp);
     }
 }

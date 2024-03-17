@@ -25,23 +25,26 @@ public class AddPostServlet extends HttpServlet {
     @SneakyThrows
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        User user = userService.getCurrentUser(req);
+        session.setAttribute("user", user);
         req.getRequestDispatcher("/pages/addPost/addPost.jsp").forward(req,resp);
     }
 
     @SneakyThrows
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
+        User user = userService.getCurrentUser(req);
         String textPost = req.getParameter("text");
         Part part = req.getPart("image");
 
         byte[] postImgByte = ImageUtil.convertToByteArray(part.getInputStream());
 
-        UserPost userPost = new UserPost(textPost, postImgByte, new User(2L));
+        UserPost userPost = new UserPost(textPost, postImgByte, new User(user.getId()));
 
         addPostService.addPostDB(userPost);
 
-        //req.setAttribute("post", addPostService.inMemoryPostStorage().getPost());
-        req.setAttribute("post", addPostService.findAllPost());
+        req.setAttribute("post", addPostService.findAllPost(user));
         req.getRequestDispatcher("/pages/addPost/addPost.jsp").forward(req,resp);
 
     }

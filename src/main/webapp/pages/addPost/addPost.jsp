@@ -41,8 +41,9 @@
     if(!(userList == null)){
         userList.reversed();
         for (UserPost entry: userList) {
-            byte[] imageData = entry.getImagePost();
-            String postText = entry.getTextPost();
+                byte[] imageData = entry.getImagePost();
+                String postText = entry.getTextPost();
+
 
 %>
 <div class="text-center mt-3">
@@ -51,8 +52,8 @@
     <h4 class="mt-3"><%= postText %></h4>
 </div>
 <%
+            }
         }
-    }
 %>
 
 </body>
