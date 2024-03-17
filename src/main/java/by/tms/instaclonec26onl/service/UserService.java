@@ -16,6 +16,10 @@ public class UserService {
         storage.save(user);
     }
 
+    public void changeCreds (User user){
+
+    }
+
     // Поиск юзера в сторэдже по никнейму
     public User findByUsername(String username)  {
         return InMemoryUserStorage.findByUsername(username);

@@ -1,0 +1,55 @@
+create table account
+(
+    id       bigserial
+        constraint account_pk
+            primary key,
+    username varchar not null
+);
+
+alter table account
+    owner to postgres;
+
+create table secret_information
+(
+    id       bigserial
+        constraint secret_information_pk
+            primary key,
+    password varchar not null,
+    autor_id bigint  not null
+        constraint secret_information_user_id_fk
+            references "user"
+);
+
+alter table secret_information
+    owner to postgres;
+
+create table "user"
+(
+    id         bigserial
+        constraint user_pk
+            primary key,
+    name       varchar not null,
+    username   varchar not null,
+    account_id bigint  not null
+        constraint user_account_id_fk
+            references account
+);
+
+alter table "user"
+    owner to postgres;
+
+
+create table user_post
+(
+    id         bigserial
+        constraint user_post_pk
+            primary key,
+    image_post bytea   not null,
+    text_post  varchar not null,
+    autor_id   bigint  not null
+        constraint user_post_user_id_fk
+            references "user"
+);
+
+alter table user_post
+    owner to postgres;

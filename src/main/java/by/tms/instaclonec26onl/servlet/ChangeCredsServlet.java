@@ -1,6 +1,7 @@
 package by.tms.instaclonec26onl.servlet;
 
 import by.tms.instaclonec26onl.model.User;
+import by.tms.instaclonec26onl.service.UserService;
 import by.tms.instaclonec26onl.storage.InMemoryUserStorage;
 
 import javax.servlet.ServletException;
@@ -14,11 +15,7 @@ import java.io.IOException;
 @WebServlet("/change-creds-1")
 public class ChangeCredsServlet extends HttpServlet {
 
-    private InMemoryUserStorage storage;
-
-    public ChangeCredsServlet(InMemoryUserStorage storage) {
-        this.storage = storage;
-    }
+    private final UserService userService = new UserService();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -28,12 +25,12 @@ public class ChangeCredsServlet extends HttpServlet {
         String newPassword = req.getParameter("new-password");
         String profilePicture = req.getParameter("profile-picture"); // Добавлена фотка профиля
 
-        User user = storage.findByUsername(username);
-        if (user != null && user.getPassword().equals(password)) {
+        User user = userService.findByUsername(username);
+        if (user.getPassword().equals(password)) {
             user.setUsername(newUsername);
             user.setPassword(newPassword);
             //user.setProfilePictureUrl(profilePicture);
-            storage.save(user);
+            userService.changeCreds(user);
             resp.sendRedirect("/pages/profile");
         } else {
             req.setAttribute("error", "Invalid username or password");
