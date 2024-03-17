@@ -28,6 +28,6 @@ public class UserValidation {
     }
 
     private User findUserByUsername(String username) {
-        return InMemoryUserStorage.findByUsername(username);
+        return storage.findByUsername(username);
     }
 }

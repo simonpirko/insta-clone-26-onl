@@ -2,7 +2,6 @@ package by.tms.instaclonec26onl.storage;
 
 import by.tms.instaclonec26onl.model.User;
 import lombok.SneakyThrows;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,9 +49,8 @@ public class InMemoryUserStorage {
         return usernameList;
     }
 
-
     @SneakyThrows
-    public static void save(User user){
+    public void save(User user){
         Connection connection =
                 DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "root");
         connection.setAutoCommit(false);
@@ -71,7 +69,7 @@ public class InMemoryUserStorage {
     }
 
     @SneakyThrows
-    public static User findByUsername(String username) {
+    public User findByUsername(String username) {
         /*User user = users.get(username);
         if (user == null) {
             throw new RuntimeException("User not found");

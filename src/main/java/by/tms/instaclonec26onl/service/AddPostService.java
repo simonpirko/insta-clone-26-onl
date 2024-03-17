@@ -9,16 +9,13 @@ import java.util.List;
 
 public class AddPostService {
 
-    InMemoryPostStorage inMemoryPostStorage = new InMemoryPostStorage();
+    private final InMemoryPostStorage inMemoryPostStorage = new InMemoryPostStorage();
 
-    /*public void addPost (UserPost userPost){
-        inMemoryPostStorage.save(userPost);
-    }*/
     public void addPostDB (UserPost userPost) {
         inMemoryPostStorage.save_DB(userPost);
     }
 
-    public List<User> findAllPost () throws SQLException {
+    public List<UserPost> findAllPost () throws SQLException {
         return inMemoryPostStorage().findAllPostUser();
     }
     public InMemoryPostStorage inMemoryPostStorage () {

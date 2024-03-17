@@ -17,10 +17,10 @@ public class User {
     private String profilePicture;
     private List<User> subscription;
     private List<User> followers;
-    private UserPost userPost;
+    private List<UserPost> userPostList;
 
-    public User(UserPost userPost) {
-        this.userPost = userPost;
+    public User(Long id) {
+        this.id = id;
     }
 
     public User(Long id, String name, String username, String password) {
@@ -28,6 +28,12 @@ public class User {
         this.name = name;
         this.username = username;
         this.password = password;
+    }
+
+    public User(Long id, String name, String username) {
+        this.id = id;
+        this.name = name;
+        this.username = username;
     }
 
     public User(String name, String username) {
@@ -48,6 +54,9 @@ public class User {
         this.profilePicture = profilePicture;
         this.subscription = subscription;
         this.followers = followers;
+    }
+
+    public User(UserPost userPost) {
     }
 
     private void validateField(String field, String fieldName, String errorMessage) {

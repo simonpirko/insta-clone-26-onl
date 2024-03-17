@@ -9,20 +9,21 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public class UserService {
-    private final InMemoryUserStorage storage = new InMemoryUserStorage();
+
+    InMemoryUserStorage inMemoryUserStorage = new InMemoryUserStorage();
 
     // Сохранение в сторэдж
     public void add(User user) {
-        storage.save(user);
+        inMemoryUserStorage.save(user);
     }
 
     public void changeCreds (User user){
-
+        inMemoryUserStorage.changeCredsUser(user);
     }
 
     // Поиск юзера в сторэдже по никнейму
     public User findByUsername(String username)  {
-        return InMemoryUserStorage.findByUsername(username);
+        return inMemoryUserStorage.findByUsername(username);
     }
 
     // Проверка сессии
@@ -35,6 +36,6 @@ public class UserService {
         return user;
     }
     public List<String> findAllUsername() {
-        return storage.findAllUsername();
+        return inMemoryUserStorage.findAllUsername();
     }
 }

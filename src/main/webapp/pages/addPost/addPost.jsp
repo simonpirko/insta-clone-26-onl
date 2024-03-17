@@ -1,5 +1,6 @@
 <%@ page import="by.tms.instaclonec26onl.model.User" %>
 <%@ page import="java.util.List" %>
+<%@ page import="by.tms.instaclonec26onl.model.UserPost" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
@@ -35,13 +36,13 @@
 </div>
 
 <%
-    List<User> userList = (List<User>) request.getAttribute("post");
+    List<UserPost> userList = (List<UserPost>) request.getAttribute("post");
 
     if(!(userList == null)){
         userList.reversed();
-        for (User entry: userList) {
-            byte[] imageData = entry.getUserPost().getImagePost();
-            String postText = entry.getUserPost().getTextPost();
+        for (UserPost entry: userList) {
+            byte[] imageData = entry.getImagePost();
+            String postText = entry.getTextPost();
 
 %>
 <div class="text-center mt-3">
