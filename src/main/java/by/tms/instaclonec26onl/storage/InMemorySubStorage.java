@@ -15,7 +15,7 @@ public class InMemorySubStorage {
 
         PreparedStatement preparedStatement = connection.prepareStatement("insert into subscription values (default, ?)");
 
-        preparedStatement.setInt(1, Math.toIntExact(user.getId()));
+        preparedStatement.setLong(1, user.getId());
 
         preparedStatement.execute();
         preparedStatement.close();

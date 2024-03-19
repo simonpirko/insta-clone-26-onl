@@ -22,8 +22,8 @@ public class PostService {
         return inMemoryPostStorage;
     }
 
-    public void removePost (UserPost userPost, int idPost){
-        inMemoryPostStorage.delete(userPost, idPost);
+    public void deletePost(UserPost userPost){
+        inMemoryPostStorage.delete(userPost);
     }
 
 }

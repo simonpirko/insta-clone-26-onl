@@ -3,6 +3,7 @@ package by.tms.instaclonec26onl.storage;
 import by.tms.instaclonec26onl.model.User;
 import by.tms.instaclonec26onl.model.UserPost;
 import lombok.Data;
+import lombok.SneakyThrows;
 
 import javax.servlet.jsp.jstl.core.IteratedExpression;
 import java.sql.*;
@@ -35,7 +36,17 @@ public class InMemoryPostStorage {
 
     }
 
-    public List<UserPost> findAllPostUser(User user) throws SQLException {
+    @SneakyThrows
+    public void findByPostId (User user) {
+        Connection connection =
+                DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "root");
+
+
+
+    }
+
+    @SneakyThrows
+    public List<UserPost> findAllPostUser(User user) {
         Connection connection =
                 DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "root");
 
@@ -58,7 +69,7 @@ public class InMemoryPostStorage {
         return posts;
     }
 
-    public List<UserPost> findAllByAccountId(Long id) throws SQLException {
+    /*public List<UserPost> findAllByAccountId(Long id) throws SQLException {
         Connection connection =
                 DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "root");
 
@@ -81,20 +92,26 @@ public class InMemoryPostStorage {
         resultSet.close();
 
         return posts;
-    }
+    }*/
 
-    public void delete (UserPost userPost, int idPost) {
-        /*try {
-            Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "root");
-            PreparedStatement preparedStatement = connection.prepareStatement("delete from user_post where id='?'");
-            preparedStatement.setBytes(1, userPost.getImagePost());
+    @SneakyThrows
+    public void delete (UserPost userPost) {
 
-            preparedStatement.execute();
+        Connection connection =
+                DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "root");
 
-            preparedStatement.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }*/
+        connection.setAutoCommit(false);
+
+        PreparedStatement preparedStatement = connection.prepareStatement("delete from user_post");
+        //preparedStatement.setBytes(1, userPost.getImagePost());
+        //preparedStatement.setLong(2, );
+
+        preparedStatement.execute();
+
+        preparedStatement.close();
+
+        connection.commit();
+
     }
 
 }

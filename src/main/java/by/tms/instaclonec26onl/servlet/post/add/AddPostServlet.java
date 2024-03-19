@@ -1,4 +1,4 @@
-package by.tms.instaclonec26onl.servlet.add_post;
+package by.tms.instaclonec26onl.servlet.post.add;
 
 import by.tms.instaclonec26onl.model.User;
 import by.tms.instaclonec26onl.model.UserPost;
@@ -25,16 +25,6 @@ public class AddPostServlet extends HttpServlet {
     @SneakyThrows
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        User user = userService.getCurrentUser(req);
-        session.setAttribute("user", user);
-        req.setAttribute("post", postService.findAllPost(user));
-        req.getRequestDispatcher("/pages/addPost/addPost.jsp").forward(req,resp);
-    }
-
-    @SneakyThrows
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
         User user = userService.getCurrentUser(req);
         String textPost = req.getParameter("text");
         Part part = req.getPart("image");
@@ -44,9 +34,6 @@ public class AddPostServlet extends HttpServlet {
         UserPost userPost = new UserPost(textPost, postImgByte, new User(user.getId()));
 
         postService.addPostDB(userPost);
-
-        req.setAttribute("post", postService.findAllPost(user));
-        req.getRequestDispatcher("/pages/addPost/addPost.jsp").forward(req,resp);
-
+        resp.sendRedirect("/profile");
     }
 }
