@@ -2,18 +2,19 @@ package by.tms.instaclonec26onl.servlet.post.add;
 
 import by.tms.instaclonec26onl.model.User;
 import by.tms.instaclonec26onl.model.UserPost;
-import by.tms.instaclonec26onl.service.PostService;
 import by.tms.instaclonec26onl.service.ImageUtil;
+import by.tms.instaclonec26onl.service.PostService;
 import by.tms.instaclonec26onl.service.UserService;
 import lombok.SneakyThrows;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
-import java.io.*;
-
-// TODO  добавить множественное добавление постов (готово)
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+import java.io.IOException;
 
 @WebServlet("/addPost")
 @MultipartConfig
@@ -24,16 +25,13 @@ public class AddPostServlet extends HttpServlet {
 
     @SneakyThrows
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
         User user = userService.getCurrentUser(req);
-        String textPost = req.getParameter("text");
-        Part part = req.getPart("image");
+        postService.addPostDB(req, user);
 
-        byte[] postImgByte = ImageUtil.convertToByteArray(part.getInputStream());
+        req.setAttribute("post", postService.findAllPost(user));
+        req.getRequestDispatcher("/pages/profile.jsp").forward(req,resp);
 
-        UserPost userPost = new UserPost(textPost, postImgByte, new User(user.getId()));
-
-        postService.addPostDB(userPost);
-        resp.sendRedirect("/profile");
     }
+
 }
