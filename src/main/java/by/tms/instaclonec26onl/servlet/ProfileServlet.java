@@ -20,13 +20,14 @@ public class ProfileServlet extends HttpServlet {
 
     private final UserService userService = new UserService();
     private final PostService postService = new PostService();
+    private User user;
 
 
     @SneakyThrows
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        User user = userService.getCurrentUser(req);
+        user = userService.getCurrentUser(req);
         session.setAttribute("user", user);
         req.setAttribute("post", postService.findAllPost(user));
         RequestDispatcher dispatcher = req.getRequestDispatcher("/pages/profile.jsp");

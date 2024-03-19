@@ -22,9 +22,12 @@ public class DeletePostServlet extends HttpServlet {
 
     @SneakyThrows
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = userService.getCurrentUser(req);
-        //postService.deletePost();
-    }
+        UserPost userPost = new UserPost();
+        postService.deletePost(userPost);
 
+        req.setAttribute("post", postService.findAllPost(user));
+        req.getRequestDispatcher("/pages/profile.jsp").forward(req,resp);
+    }
 }
