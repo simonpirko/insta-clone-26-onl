@@ -12,11 +12,15 @@
     <title>Subscribers</title>
 </head>
 <body>
+<ul>
 <c:forEach var="subscription" items="${subscriptions}">
-    <form method="get" action="userPage">
-        <input type="hidden" name="username" value="${subscription}">
-        <button>${subscription}</button>
-    </form>
+
+      <form method="get" action="userPage">
+          <input type="hidden" name="username" value="${subscription}">
+          <button>${subscription}</button>
+      </form>
+
 </c:forEach>
+</ul>
 </body>
 </html>

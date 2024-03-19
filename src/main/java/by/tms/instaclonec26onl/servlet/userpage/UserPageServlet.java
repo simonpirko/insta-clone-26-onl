@@ -20,4 +20,16 @@ public class UserPageServlet extends HttpServlet {
         req.setAttribute("username",byUsername);
         getServletContext().getRequestDispatcher("/pages/user/user-page.jsp").forward(req,resp);
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        User myProfile =(User) req.getSession().getAttribute("user");
+        String username = req.getParameter("username");
+        User user = userService.findByUsername(username);
+        if (myProfile.getSubscription().stream().noneMatch(u -> u.equals(user.getUsername()))){
+            myProfile.getSubscription().add(user.getUsername());
+            user.getFollowers().add(myProfile.getUsername());
+        }
+        resp.sendRedirect("/userPage?username=" + username);
+    }
 }

@@ -6,7 +6,8 @@
 </head>
 <body>
 <h1>${user.name}</h1>
-<a href="/friend">Friends</a>
+<a href="/subscription">Friends</a>
+<a href="http://localhost:8080/subscription?username=${user.username}"> subscriptions </a>
 <br>
 <a href="/search">Search</a>
 </body>
