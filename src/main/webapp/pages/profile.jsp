@@ -6,9 +6,10 @@
 </head>
 <body>
 <h1>${user.name}</h1>
-<a href="/subscription">Friends</a>
 <a href="http://localhost:8080/subscription?username=${user.username}"> subscriptions </a>
 <br>
-<a href="/search">Search</a>
+<a href="http://localhost:8080/follower?username=${user.username}"> follower </a>
+<br>
+<a href="/search">search</a>
 </body>
 </html>

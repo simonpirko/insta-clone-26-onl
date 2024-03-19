@@ -30,7 +30,4 @@ public class UserService {
         }
         return user;
     }
-    public List<String> findAllUsername() {
-        return storage.findAllUsername();
-    }
 }

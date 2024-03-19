@@ -19,7 +19,7 @@
 </form>
 
 <a href="http://localhost:8080/subscription?username=${username.username}"> subscription </a>
-
+<br>
 <a href="http://localhost:8080/follower?username=${username.username}"> follower </a>
 
 </body>

@@ -19,7 +19,7 @@ public class SearchServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = new User("ilia","lil","qwe","",new ArrayList<>(),new ArrayList<>());
         User user1 = new User("ilia","lil1","qwe2","",new ArrayList<>(),new ArrayList<>());
-
+        User my = (User) req.getSession().getAttribute("user");
         userService.add(user);
         userService.add(user1);
 
