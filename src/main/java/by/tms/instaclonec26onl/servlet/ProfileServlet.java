@@ -2,7 +2,7 @@ package by.tms.instaclonec26onl.servlet;
 
 import by.tms.instaclonec26onl.model.User;
 import by.tms.instaclonec26onl.model.UserPost;
-import by.tms.instaclonec26onl.service.AddPostService;
+import by.tms.instaclonec26onl.service.PostService;
 import by.tms.instaclonec26onl.service.ImageUtil;
 import by.tms.instaclonec26onl.service.UserService;
 import lombok.SneakyThrows;
@@ -19,7 +19,7 @@ import java.io.IOException;
 public class ProfileServlet extends HttpServlet {
 
     private final UserService userService = new UserService();
-    private final AddPostService addPostService = new AddPostService();
+    private final PostService postService = new PostService();
     private User user;
 
     @SneakyThrows
@@ -28,7 +28,7 @@ public class ProfileServlet extends HttpServlet {
         HttpSession session = req.getSession();
         user = userService.getCurrentUser(req);
         session.setAttribute("user", user);
-        req.setAttribute("post", addPostService.findAllPost(user));
+        req.setAttribute("post", postService.findAllPost(user));
         RequestDispatcher dispatcher = req.getRequestDispatcher("/pages/profile.jsp");
         dispatcher.forward(req, resp);
     }
@@ -44,7 +44,7 @@ public class ProfileServlet extends HttpServlet {
 
         UserPost userPost = new UserPost(textPost, postImgByte, new User(user.getId()));
 
-        addPostService.addPostDB(userPost);
+        postService.addPostDB(userPost);
 
         resp.sendRedirect("/profile");
     }

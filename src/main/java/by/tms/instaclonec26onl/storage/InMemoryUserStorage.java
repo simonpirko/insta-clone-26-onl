@@ -10,16 +10,13 @@ import java.util.concurrent.ConcurrentHashMap;
 
 // Типа БД
 public class InMemoryUserStorage {
-    private final static Map<String, User> users = new ConcurrentHashMap<>();
-    private final static List<String> listUsername = new ArrayList<>();
+    //private final static Map<String, User> users = new ConcurrentHashMap<>();
+    //private final static List<String> listUsername = new ArrayList<>();
 
     // сохранение в Map
     /*public static void save(User user) {
         users.computeIfAbsent(user.getUsername(), k -> user);
     }*/
-
-    public void delete(User user) {
-    }
 
     @SneakyThrows
     public List<String> findAllUsername() {
@@ -38,7 +35,7 @@ public class InMemoryUserStorage {
 
         while (resultSet.next()){
 
-            String username = resultSet.getString(2);
+            String username = resultSet.getString(3);
 
             usernameList.add(username);
         }
@@ -112,6 +109,8 @@ public class InMemoryUserStorage {
         updateUser.setLong(3, user.getId());
 
         updateUser.executeUpdate();
+
+        connection.commit();
 
     }
 

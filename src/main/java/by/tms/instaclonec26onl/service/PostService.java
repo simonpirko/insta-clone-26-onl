@@ -7,7 +7,7 @@ import by.tms.instaclonec26onl.storage.InMemoryPostStorage;
 import java.sql.SQLException;
 import java.util.List;
 
-public class AddPostService {
+public class PostService {
 
     private final InMemoryPostStorage inMemoryPostStorage = new InMemoryPostStorage();
 

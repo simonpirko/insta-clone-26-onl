@@ -1,6 +1,7 @@
 package by.tms.instaclonec26onl.servlet;
 
 import by.tms.instaclonec26onl.model.User;
+import by.tms.instaclonec26onl.service.SubscriptionService;
 import by.tms.instaclonec26onl.service.UserService;
 
 import javax.servlet.RequestDispatcher;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 @WebServlet("/registration")
 public class RegistrationServlet extends HttpServlet {
     private final UserService userService = new UserService();
+    private final SubscriptionService subscriptionService = new SubscriptionService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         getServletContext()
@@ -43,6 +45,7 @@ public class RegistrationServlet extends HttpServlet {
 
         try {
             userService.add(user);
+            subscriptionService.addSubscribeByUser(userService.findByUsername(user.getUsername()));
             req.getSession().setAttribute("user", user);
             resp.sendRedirect("/profile");
         } catch (IllegalArgumentException e) {

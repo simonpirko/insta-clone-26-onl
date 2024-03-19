@@ -2,7 +2,7 @@ package by.tms.instaclonec26onl.servlet.add_post;
 
 import by.tms.instaclonec26onl.model.User;
 import by.tms.instaclonec26onl.model.UserPost;
-import by.tms.instaclonec26onl.service.AddPostService;
+import by.tms.instaclonec26onl.service.PostService;
 import by.tms.instaclonec26onl.service.ImageUtil;
 import by.tms.instaclonec26onl.service.UserService;
 import lombok.SneakyThrows;
@@ -19,7 +19,7 @@ import java.io.*;
 @MultipartConfig
 public class AddPostServlet extends HttpServlet {
 
-    private final AddPostService addPostService = new AddPostService();
+    private final PostService postService = new PostService();
     private final UserService userService = new UserService();
 
     @SneakyThrows
@@ -28,7 +28,7 @@ public class AddPostServlet extends HttpServlet {
         HttpSession session = req.getSession();
         User user = userService.getCurrentUser(req);
         session.setAttribute("user", user);
-        req.setAttribute("post", addPostService.findAllPost(user));
+        req.setAttribute("post", postService.findAllPost(user));
         req.getRequestDispatcher("/pages/addPost/addPost.jsp").forward(req,resp);
     }
 
@@ -43,9 +43,9 @@ public class AddPostServlet extends HttpServlet {
 
         UserPost userPost = new UserPost(textPost, postImgByte, new User(user.getId()));
 
-        addPostService.addPostDB(userPost);
+        postService.addPostDB(userPost);
 
-        req.setAttribute("post", addPostService.findAllPost(user));
+        req.setAttribute("post", postService.findAllPost(user));
         req.getRequestDispatcher("/pages/addPost/addPost.jsp").forward(req,resp);
 
     }
