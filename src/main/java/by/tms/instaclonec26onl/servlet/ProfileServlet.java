@@ -1,9 +1,7 @@
 package by.tms.instaclonec26onl.servlet;
 
 import by.tms.instaclonec26onl.model.User;
-import by.tms.instaclonec26onl.model.UserPost;
 import by.tms.instaclonec26onl.service.PostService;
-import by.tms.instaclonec26onl.service.ImageUtil;
 import by.tms.instaclonec26onl.service.UserService;
 import lombok.SneakyThrows;
 import javax.servlet.RequestDispatcher;
@@ -20,16 +18,15 @@ public class ProfileServlet extends HttpServlet {
 
     private final UserService userService = new UserService();
     private final PostService postService = new PostService();
-    private User user;
-
 
     @SneakyThrows
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        user = userService.getCurrentUser(req);
+        User user = userService.getCurrentUser(req);
         session.setAttribute("user", user);
         req.setAttribute("post", postService.findAllPost(user));
+        req.setAttribute("username", user.getUsername());
         RequestDispatcher dispatcher = req.getRequestDispatcher("/pages/profile.jsp");
         dispatcher.forward(req, resp);
     }

@@ -30,7 +30,7 @@ public class AddPostServlet extends HttpServlet {
         postService.addPostDB(req, user);
 
         req.setAttribute("post", postService.findAllPost(user));
-        req.getRequestDispatcher("/pages/profile.jsp").forward(req,resp);
+        resp.sendRedirect("/profile");
 
     }
 

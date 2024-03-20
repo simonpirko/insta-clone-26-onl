@@ -4,7 +4,6 @@ package by.tms.instaclonec26onl.servlet;
 import by.tms.instaclonec26onl.model.User;
 import by.tms.instaclonec26onl.storage.InMemoryUserStorage;
 import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import javax.servlet.ServletException;
@@ -47,7 +46,7 @@ public class ChangeProfilePhotoServlet extends HttpServlet {
 
                         // Обновление URL ссылки фотки профиля юзера с редиректом на страницу профиля (это я уже сам сделал)
                         String username = req.getParameter("username");
-                        User user = storage.findByUsername(username);
+                        User user = storage.findUserByUsername(username);
 
                         user.setProfilePicture(filePath);
                         storage.save(user);

@@ -36,6 +36,11 @@ public class RegistrationServlet extends HttpServlet {
             RequestDispatcher dispatcher = req.getRequestDispatcher("/pages/registration.jsp");
             dispatcher.forward(req, resp);
             return;
+        } else if (username.equals(userService.findUserByUsername(username).getUsername())) {
+            req.setAttribute("message", "This user already exists");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/pages/home.jsp");
+            dispatcher.forward(req, resp);
+            return;
         }
 
         User user = new User(name, username, password, profilePictureUrl,new ArrayList<>(),new ArrayList<>());
@@ -45,7 +50,7 @@ public class RegistrationServlet extends HttpServlet {
 
         try {
             userService.add(user);
-            subscriptionService.addSubscribeByUser(userService.findByUsername(user.getUsername()));
+            subscriptionService.addSubscribeByUser(userService.findUserByUsername(user.getUsername()));
             req.getSession().setAttribute("user", user);
             resp.sendRedirect("/profile");
         } catch (IllegalArgumentException e) {

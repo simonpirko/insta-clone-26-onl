@@ -2,7 +2,6 @@ package by.tms.instaclonec26onl.servlet;
 
 import by.tms.instaclonec26onl.model.User;
 import by.tms.instaclonec26onl.service.UserService;
-import by.tms.instaclonec26onl.storage.InMemoryUserStorage;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,7 +24,7 @@ public class ChangeCredsServlet extends HttpServlet {
         String newPassword = req.getParameter("new-password");
         String profilePicture = req.getParameter("profile-picture"); // Добавлена фотка профиля
 
-        User user = userService.findByUsername(username);
+        User user = userService.findUserByUsername(username);
         if (user.getPassword().equals(password)) {
             user.setUsername(newUsername);
             user.setPassword(newPassword);

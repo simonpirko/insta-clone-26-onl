@@ -41,6 +41,9 @@ public class User {
         this.username = username;
     }
 
+    public User() {
+    }
+
     // Если любое поле null или пустая строка то бросаем IllegalArgumentException (добавил константу сообщения для проверки, кастомное исключение можно удалить)
 
     public User(String name, String username, String password, String profilePicture, List<User> subscription, List<User> followers) {
@@ -54,9 +57,6 @@ public class User {
         this.profilePicture = profilePicture;
         this.subscription = subscription;
         this.followers = followers;
-    }
-
-    public User(UserPost userPost) {
     }
 
     private void validateField(String field, String fieldName, String errorMessage) {

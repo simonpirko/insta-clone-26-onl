@@ -20,7 +20,7 @@ public class UserFollowerServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<String> followersName = new ArrayList<>();
         String userName = req.getParameter("followers");
-        User user = userService.findByUsername(userName);
+        User user = userService.findUserByUsername(userName);
         for (User users : user.getFollowers()) {
             followersName.add(users.getUsername());
         }

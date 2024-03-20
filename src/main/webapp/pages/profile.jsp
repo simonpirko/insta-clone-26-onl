@@ -1,7 +1,8 @@
-<%@ page import="by.tms.instaclonec26onl.model.User" %>
-<%@ page import="java.util.List" %>
-<%@ page import="by.tms.instaclonec26onl.model.UserPost" %>
+<%@ page import="java.util.Base64" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <html>
 <head>
     <title>Profile</title>
@@ -31,7 +32,9 @@
                 <div class="modal-body">
                     <form  method="post" action="addPost" enctype="multipart/form-data">
                         <input type="file" name="image" id="photoInput">
-                        <input type="text" name="text">
+                        <label>
+                            <input type="text" name="text">
+                        </label>
                         <input type="submit" value="Загрузить">
                     </form>
                 </div>
@@ -39,29 +42,35 @@
         </div>
     </div>
 
-    <%
+    <c:forEach var="userPost" items="${post}">
+        <div class="text-center mt-3">
+            <c:set var="imgByte" value="${Base64.getEncoder().encodeToString(userPost.imagePost)}" />
+            <img src="data:image/png;base64,${imgByte}"
+                 class="img-fluid" width="30%" height="40%" alt="">
+            <h4 class="mt-3">${username}</h4>
+            <h4 class="mt-3">${userPost.textPost}</h4>
+            <form method="post" action="deletePost">
+                <input type="submit" value="Delete">
+                <input type="hidden" name="idPost" value="${userPost.idPost}">
+            </form>
+        </div>
+    </c:forEach>
+
+<%--
         List<UserPost> userList = (List<UserPost>) request.getAttribute("post");
 
         if(!(userList == null)){
             userList.reversed();
             for (UserPost entry: userList) {
-                byte[] imageData = entry.getImagePost();
+                byte[] imgPost = entry.getImagePost();
                 String postText = entry.getTextPost();
-
-
+                String idPost = String.valueOf(entry.getIdPost());
     %>
-    <div class="text-center mt-3">
-        <img src="data:image/jpeg;base64,<%= new String(java.util.Base64.getEncoder().encode(imageData)) %>"
-             class="img-fluid" width="30%" height="40%" alt="">
-        <h4 class="mt-3"><%= postText %></h4>
-        <form method="post" action="deletePost">
-            <input type="submit" value="Delete">
-        </form>
-    </div>
+
     <%
             }
         }
-    %>
+    --%>
 
 </div>
 

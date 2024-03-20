@@ -5,8 +5,6 @@ import lombok.SneakyThrows;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 // Типа БД
 public class InMemoryUserStorage {
@@ -19,7 +17,7 @@ public class InMemoryUserStorage {
     }*/
 
     @SneakyThrows
-    public List<String> findAllUsername() {
+    public List<User> findAllUser() {
         /*List<User> list = users.values().stream().toList();
         for (User user : list) {
             listUsername.add(user.getUsername());
@@ -31,19 +29,21 @@ public class InMemoryUserStorage {
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("select * from user_account");
 
-        List<String> usernameList = new ArrayList<>();
+        List<User> userList = new ArrayList<>();
 
         while (resultSet.next()){
 
+            long id = resultSet.getLong(1);
+            String name = resultSet.getString(2);
             String username = resultSet.getString(3);
 
-            usernameList.add(username);
+            userList.add(new User(id, name, username));
         }
 
         resultSet.close();
         connection.commit();
 
-        return usernameList;
+        return userList;
     }
 
     @SneakyThrows
@@ -66,7 +66,7 @@ public class InMemoryUserStorage {
     }
 
     @SneakyThrows
-    public User findByUsername(String username) {
+    public User findUserByUsername(String username) {
         /*User user = users.get(username);
         if (user == null) {
             throw new RuntimeException("User not found");
@@ -81,18 +81,18 @@ public class InMemoryUserStorage {
 
         while (resultSet.next()){
             if (resultSet.getString(3).equals(username)) {
-                break;
+                long id = resultSet.getLong(1);
+                String name = resultSet.getString(2);
+                String password = resultSet.getString(4);
+
+                resultSet.close();
+
+                connection.commit();
+                return new User(id, name, username, password);
             }
         }
 
-        long id = resultSet.getLong(1);
-        String name = resultSet.getString(2);
-        String password = resultSet.getString(4);
-
-        resultSet.close();
-
-        connection.commit();
-        return new User(id, name, username, password);
+        return new User();
 
     }
 

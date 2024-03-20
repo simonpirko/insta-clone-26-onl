@@ -69,7 +69,8 @@ public class InMemoryPostStorage {
         return posts;
     }
 
-    /*public List<UserPost> findAllByAccountId(Long id) throws SQLException {
+    @SneakyThrows
+    public List<UserPost> findAllByAccountId(Long id) {
         Connection connection =
                 DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "root");
 
@@ -92,19 +93,18 @@ public class InMemoryPostStorage {
         resultSet.close();
 
         return posts;
-    }*/
+    }
 
     @SneakyThrows
-    public void delete (UserPost userPost) {
+    public void delete (long userId) {
 
         Connection connection =
                 DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "root");
 
         connection.setAutoCommit(false);
 
-        PreparedStatement preparedStatement = connection.prepareStatement("delete from user_post");
-        //preparedStatement.setBytes(1, userPost.getImagePost());
-        //preparedStatement.setLong(2, );
+        PreparedStatement preparedStatement = connection.prepareStatement("delete from user_post where id = ?");
+        preparedStatement.setLong(1, userId);
 
         preparedStatement.execute();
 

@@ -28,14 +28,15 @@ public class PostService {
     }
 
     public List<UserPost> findAllPost (User user) {
-        return inMemoryPostStorage().findAllPostUser(user);
-    }
-    public InMemoryPostStorage inMemoryPostStorage () {
-        return inMemoryPostStorage;
+        return inMemoryPostStorage.findAllPostUser(user);
     }
 
-    public void deletePost(UserPost userPost){
-        inMemoryPostStorage.delete(userPost);
+    public List<UserPost> findAllByAccountId (long id) {
+        return inMemoryPostStorage.findAllByAccountId(id);
+    }
+
+    public void deletePost(long userId){
+        inMemoryPostStorage.delete(userId);
     }
 
 }

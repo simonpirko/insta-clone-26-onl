@@ -22,8 +22,8 @@ public class UserService {
     }
 
     // Поиск юзера в сторэдже по никнейму
-    public User findByUsername(String username)  {
-        return inMemoryUserStorage.findByUsername(username);
+    public User findUserByUsername(String username)  {
+        return inMemoryUserStorage.findUserByUsername(username);
     }
 
     // Проверка сессии
@@ -35,7 +35,7 @@ public class UserService {
         }
         return user;
     }
-    public List<String> findAllUsername() {
-        return inMemoryUserStorage.findAllUsername();
+    public List<User> findAllUser() {
+        return inMemoryUserStorage.findAllUser();
     }
 }
