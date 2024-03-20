@@ -12,12 +12,10 @@
     <title>followers</title>
 </head>
 <body>
+<ul>
 <c:forEach var="follower" items="${followers}">
-    <form method="get" action="userPage">
-        <input type="hidden" name="username" value="${follower}">
-        <button>${follower}</button>
-    </form>
+    <li><a href="http://localhost:8080/userPage?username=${follower}"> ${follower} </a></li>
 </c:forEach>
-
+</ul>
 </body>
 </html>

@@ -12,26 +12,18 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet("/userPage")
+@WebServlet(value = "/userPage", name = "userPageServlet")
 public class UserPageServlet extends HttpServlet {
     private final UserService userService = new UserService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User myProfile = (User) req.getSession().getAttribute("user");
         String username = req.getParameter("username");
-        User byUsername;
+        User byUsername = userService.findByUsername(username);
 
-        try {
-            byUsername = userService.findByUsername(username);
-            if (!myProfile.getUsername().equals(byUsername.getUsername())) {
-                req.setAttribute("username", byUsername);
-                getServletContext().getRequestDispatcher("/pages/user/user-page.jsp").forward(req, resp);
-            }
-            resp.sendRedirect("/profile");
-        } catch (RuntimeException e) {
-            resp.sendRedirect("/search");
-        }
+        req.setAttribute("username", byUsername);
+        getServletContext().getRequestDispatcher("/pages/user/user-page.jsp").forward(req, resp);
+
 
     }
 
