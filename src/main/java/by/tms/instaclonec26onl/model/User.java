@@ -14,12 +14,12 @@ public class User {
     private String username;
     private String password;
     private String profilePicture;
-    private List<User> subscription;
-    private List<User> followers;
+    private List<String> subscription;
+    private List<String> followers;
 
     // Если любое поле null или пустая строка то бросаем IllegalArgumentException (добавил константу сообщения для проверки, кастомное исключение можно удалить)
 
-    public User(String name, String username, String password, String profilePicture, List<User> subscription, List<User> followers) {
+    public User(String name, String username, String password, String profilePicture, List<String> subscription, List<String> followers) {
         this.validateField(name, "name", EMPTY_FIELD_MESSAGE);
         this.validateField(username, "username", EMPTY_FIELD_MESSAGE);
         this.validateField(password, "password", EMPTY_FIELD_MESSAGE);

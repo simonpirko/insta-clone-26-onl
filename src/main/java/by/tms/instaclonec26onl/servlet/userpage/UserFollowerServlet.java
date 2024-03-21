@@ -18,13 +18,10 @@ public class UserFollowerServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<String> followersName = new ArrayList<>();
-        String userName = req.getParameter("followers");
+        String userName = req.getParameter("username");
         User user = userService.findByUsername(userName);
-        for (User users : user.getFollowers()) {
-            followersName.add(users.getUsername());
-        }
-        req.setAttribute("followers", followersName);
+        req.setAttribute("followers", user.getFollowers());
+
         getServletContext().getRequestDispatcher("/pages/user/user-followers.jsp").forward(req, resp);
     }
 }

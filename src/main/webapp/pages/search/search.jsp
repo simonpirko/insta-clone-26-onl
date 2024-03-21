@@ -18,13 +18,5 @@
     <button>enter</button>
     <br>
 </form>
-<c:forEach var="users" items="${allUser}">
-    <c:if test="${users != user.username}">
-    <form action="userPage" method="get">
-        <input type="hidden" name="username" value="${users}">
-        <button>${users}</button>
-    </form>
-</c:if>
-</c:forEach>
 </body>
 </html>
