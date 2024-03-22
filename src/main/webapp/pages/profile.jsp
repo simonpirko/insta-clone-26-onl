@@ -1,8 +1,4 @@
-<%@ page import="java.util.Base64" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
 <html>
 <head>
     <title>Profile</title>
@@ -12,9 +8,11 @@
 </head>
 <body>
 <h1>${user.name}</h1>
-<a href="/friend">Friends</a>
+<a href="http://localhost:8080/subscription?username=${user.username}"> subscriptions </a>
 <br>
-<a href="/search">Search</a>
+<a href="http://localhost:8080/follower?username=${user.username}"> follower </a>
+<br>
+<a href="/search">search</a>
 
 <div>
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
@@ -73,6 +71,5 @@
     --%>
 
 </div>
-
 </body>
 </html>
