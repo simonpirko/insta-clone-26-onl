@@ -20,7 +20,7 @@ public class SearchFilter extends HttpFilter {
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
         String username = req.getParameter("username");
        try {
-           User byUsername = userService.findByUsername(username);
+           User byUsername = userService.findUserByUsername(username);
            chain.doFilter(req,res);
        }catch (RuntimeException e){
            res.sendRedirect("/search");

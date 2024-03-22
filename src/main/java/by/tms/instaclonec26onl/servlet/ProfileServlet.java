@@ -1,6 +1,7 @@
 package by.tms.instaclonec26onl.servlet;
 
 import by.tms.instaclonec26onl.model.User;
+import by.tms.instaclonec26onl.model.UserPost;
 import by.tms.instaclonec26onl.service.PostService;
 import by.tms.instaclonec26onl.service.UserService;
 import lombok.SneakyThrows;
@@ -10,6 +11,9 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 // Сервлет для страницы профиля
 @WebServlet("/profile")

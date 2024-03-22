@@ -20,7 +20,7 @@ public class UserPageFilter extends HttpFilter {
         User myProfile = (User) req.getSession().getAttribute("user");
         String username = req.getParameter("username");
         User byUsername;
-        byUsername = userService.findByUsername(username);
+        byUsername = userService.findUserByUsername(username);
         if (!myProfile.getUsername().equals(byUsername.getUsername())) {
             chain.doFilter(req, res);
         }
