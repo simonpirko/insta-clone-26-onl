@@ -84,7 +84,7 @@ public class InMemoryUserStorage {
             if (resultSet.getString(3).equals(username)) {
                 long id = resultSet.getLong(1);
                 String name = resultSet.getString(2);
-                String password = resultSet.getString(4);
+                String password = resultSet.getString(3);
 
                 resultSet.close();
 
@@ -94,6 +94,38 @@ public class InMemoryUserStorage {
         }
 
         return new User();
+
+    }
+
+    @SneakyThrows
+    public User findUserById (long id) {
+
+        Connection connection =
+                DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "root");
+        connection.setAutoCommit(false);
+
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("select * from user_account");
+        User user = new User();
+
+        while (resultSet.next()){
+            if (resultSet.getLong(1) == id) {
+                String name = resultSet.getString(2);
+                String username = resultSet.getString(3);
+
+                user.setId(id);
+                user.setName(name);
+                user.setUsername(username);
+
+                break;
+            }
+        }
+
+        resultSet.close();
+
+        connection.commit();
+
+        return user;
 
     }
 

@@ -29,7 +29,6 @@ public class AddPostServlet extends HttpServlet {
         User user = userService.getCurrentUser(req);
         postService.addPostDB(req, user);
 
-        req.setAttribute("post", postService.findAllPost(user));
         resp.sendRedirect("/profile");
 
     }

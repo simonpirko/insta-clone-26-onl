@@ -1,4 +1,7 @@
+<%@ page import="java.util.Base64" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
     <title>Profile</title>
@@ -43,16 +46,16 @@
     <c:forEach var="userPost" items="${post}">
         <div class="text-center mt-3">
             <c:set var="imgByte" value="${Base64.getEncoder().encodeToString(userPost.imagePost)}" />
-            <img src="data:image/png;base64,${imgByte}"
+            <img src="data:image/jpeg;base64,${imgByte}"
                  class="img-fluid" width="30%" height="40%" alt="">
-            <h4 class="mt-3">${username}</h4>
-            <h4 class="mt-3">${userPost.textPost}</h4>
+            <h4 class="mt-3">${username} : ${userPost.textPost}</h4>
             <form method="post" action="deletePost">
                 <input type="submit" value="Delete">
                 <input type="hidden" name="idPost" value="${userPost.idPost}">
             </form>
         </div>
     </c:forEach>
+
 
 <%--
         List<UserPost> userList = (List<UserPost>) request.getAttribute("post");

@@ -37,15 +37,6 @@ public class InMemoryPostStorage {
     }
 
     @SneakyThrows
-    public void findByPostId (User user) {
-        Connection connection =
-                DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "root");
-
-
-
-    }
-
-    @SneakyThrows
     public List<UserPost> findAllPostUser(User user) {
         Connection connection =
                 DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "root");
@@ -74,7 +65,7 @@ public class InMemoryPostStorage {
         Connection connection =
                 DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "root");
 
-        PreparedStatement preparedStatement = connection.prepareStatement("select * from user_post p join user u on p.author_id = u.id where u.id=?");
+        PreparedStatement preparedStatement = connection.prepareStatement("select * from user_post p join user_account u on p.autor_id = u.id where u.id=?");
         preparedStatement.setLong(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();
 

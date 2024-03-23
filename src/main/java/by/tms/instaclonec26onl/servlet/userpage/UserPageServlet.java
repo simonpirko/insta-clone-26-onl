@@ -2,6 +2,7 @@ package by.tms.instaclonec26onl.servlet.userpage;
 
 import by.tms.instaclonec26onl.custom_exceptions.UserNotFoundException;
 import by.tms.instaclonec26onl.model.User;
+import by.tms.instaclonec26onl.service.SubscriptionService;
 import by.tms.instaclonec26onl.service.UserService;
 
 import javax.servlet.ServletException;
@@ -10,11 +11,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
+
+import static java.util.Arrays.stream;
 
 @WebServlet(value = "/userPage", name = "userPageServlet")
 public class UserPageServlet extends HttpServlet {
     private final UserService userService = new UserService();
+    private final SubscriptionService subscriptionService = new SubscriptionService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -32,13 +36,29 @@ public class UserPageServlet extends HttpServlet {
         User myProfile = (User) req.getSession().getAttribute("user");
         String username = req.getParameter("username");
         User user = userService.findUserByUsername(username);
-        if (myProfile.getSubscription().stream().noneMatch(u -> u.equals(user.getUsername()))) {
-            myProfile.getSubscription().add(user.getUsername());
-            user.getFollowers().add(myProfile.getUsername());
-        } else {
-            myProfile.getSubscription().remove(user.getUsername());
-            user.getFollowers().remove(myProfile.getUsername());
+        List<User> userList = subscriptionService.findSubUser(myProfile.getId());
+
+        for (User listUser : userList) {
+            if (user.getId().equals(listUser.getId())) {
+                subscriptionService.unSubUser(myProfile, user);
+                resp.sendRedirect("/userPage?username=" + username);
+                return;
+            }
         }
+
+        subscriptionService.addSubscribeUser(myProfile, user);
         resp.sendRedirect("/userPage?username=" + username);
+
+        //subscriptionService.findSubUser(myProfile)
+        //                .stream()
+        //                .noneMatch(u -> u.getId().equals(user.getId()))
+
+        /*if (userList.stream()
+                .noneMatch(u -> u.getId().equals(user.getId()))) {
+            subscriptionService.addSubscribeUser(myProfile, user);
+        } else {
+            subscriptionService.unSubUser(myProfile, user);
+        }*/
+
     }
 }

@@ -1,3 +1,15 @@
+create table subscribers
+(
+    id        bigserial
+        constraint subscribers_pk
+            primary key,
+    follower  integer not null,
+    subscribe integer not null
+);
+
+alter table subscribers
+    owner to postgres;
+
 create table user_account
 (
     id       bigint default nextval('user_id_seq'::regclass) not null

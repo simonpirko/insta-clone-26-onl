@@ -25,11 +25,11 @@ public class ProfileServlet extends HttpServlet {
 
     @SneakyThrows
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         User user = userService.getCurrentUser(req);
-        session.setAttribute("user", user);
-        req.setAttribute("post", postService.findAllPost(user));
+        List<UserPost> userPostReverse = postService.findAllPost(user);
+        Collections.reverse(userPostReverse);
+        req.setAttribute("post", userPostReverse);
         req.setAttribute("username", user.getUsername());
         RequestDispatcher dispatcher = req.getRequestDispatcher("/pages/profile.jsp");
         dispatcher.forward(req, resp);

@@ -26,13 +26,15 @@ public class UserService {
         return inMemoryUserStorage.findUserByUsername(username);
     }
 
+    public User findUserById(long id) {
+        return inMemoryUserStorage.findUserById(id);
+    }
+
     // Проверка сессии
     public User getCurrentUser(HttpServletRequest request) throws UserNotFoundException {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        if (user == null) {
-            throw new UserNotFoundException("User not found in session");
-        }
+
         return user;
     }
     public List<User> findAllUser() {

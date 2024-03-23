@@ -50,8 +50,8 @@ public class RegistrationServlet extends HttpServlet {
 
         try {
             userService.add(user);
-            subscriptionService.addSubscribeByUser(userService.findUserByUsername(user.getUsername()));
-            req.getSession().setAttribute("user", user);
+            User newUser = userService.findUserByUsername(username);
+            req.getSession().setAttribute("user", newUser);
             resp.sendRedirect("/profile");
         } catch (IllegalArgumentException e) {
             req.setAttribute("message", e.getMessage());
