@@ -1,22 +1,13 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Sokol-1
-  Date: 01.03.2024
-  Time: 2:23
-  To change this template use File | Settings | File Templates.
-
-Страница изменений пароля и имени
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Change Credentials</title>
+    <link rel="stylesheet" type="text/css" href="/pages/style.css">
 </head>
 <body>
-<h1>Change Username/Password/Profile Photo</h1>
+<h1>Settings</h1>
 
-<form method="post" action="/change-credentials">
+<form method="post" action="/settings">
     <label for="username">Username:</label>
     <input type="text" name="username" id="username" required/><br/>
     <label for="password">Password:</label>
@@ -32,13 +23,12 @@
     <p>${error}</p>
 </c:if>
 
-<h2>Change Profile Picture</h2>
-<form action="/change-profile-photo" method="post" enctype="multipart/form-data">
-    <input type="file" name="profile-picture" />
-    <input type="hidden" name="username" value="${user.username}" />
-    <button type="submit">Change Profile Picture</button>
+<h2>Update Profile Picture</h2>
+<form id="uploadForm" method="post" action="/uploadProfilePicture" enctype="multipart/form-data">
+    <input type="file" id="uploadInput" name="photo" accept="image/*">
+    <input type="submit" value="Upload">
 </form>
 
-<a href="/home">Back to Home Page</a>
+<a href="/profile">Back to profile</a>
 </body>
 </html>
