@@ -2,8 +2,11 @@ package by.tms.instaclonec26onl.servlet.userpage;
 
 import by.tms.instaclonec26onl.custom_exceptions.UserNotFoundException;
 import by.tms.instaclonec26onl.model.User;
+import by.tms.instaclonec26onl.model.UserPost;
+import by.tms.instaclonec26onl.service.PostService;
 import by.tms.instaclonec26onl.service.SubscriptionService;
 import by.tms.instaclonec26onl.service.UserService;
+import lombok.SneakyThrows;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 import static java.util.Arrays.stream;
@@ -19,13 +23,17 @@ import static java.util.Arrays.stream;
 public class UserPageServlet extends HttpServlet {
     private final UserService userService = new UserService();
     private final SubscriptionService subscriptionService = new SubscriptionService();
+    private final PostService postService = new PostService();
 
+    @SneakyThrows
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
         User byUsername = userService.findUserByUsername(username);
-
-        req.setAttribute("username", byUsername);
+        List<UserPost> userPostReverse = postService.findAllPost(byUsername);
+        Collections.reverse(userPostReverse);
+        req.setAttribute("post", userPostReverse);
+        req.setAttribute("username", byUsername.getUsername());
         getServletContext().getRequestDispatcher("/pages/user/user-page.jsp").forward(req, resp);
 
 
