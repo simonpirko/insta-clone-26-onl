@@ -1,12 +1,7 @@
 package by.tms.instaclonec26onl.storage;
 
-import by.tms.instaclonec26onl.custom_exceptions.UserNotFoundException;
 import by.tms.instaclonec26onl.model.User;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 // Типа БД
@@ -25,6 +20,11 @@ public class InMemoryUserStorage {
         return user;
     }
 
-    public void delete(User user) {
+    public static void update(User user) {
+        users.put(user.getUsername(), user);
+    }
+
+    public static void delete(User user) {
+        users.remove(user.getUsername());
     }
 }

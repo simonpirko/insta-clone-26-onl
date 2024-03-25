@@ -6,14 +6,16 @@ import by.tms.instaclonec26onl.storage.InMemoryUserStorage;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 public class UserService {
     private final InMemoryUserStorage storage = new InMemoryUserStorage();
 
     // Сохранение в сторэдж
     public void add(User user) {
-        storage.save(user);
+        InMemoryUserStorage.save(user);
+    }
+    public void update(User user){
+        InMemoryUserStorage.update(user);
     }
 
     // Поиск юзера в сторэдже по никнейму

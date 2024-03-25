@@ -13,10 +13,10 @@ import java.io.IOException;
 
 @WebServlet("/imageUploadTest")
 @MultipartConfig
-public class ExexampleUplodEndOutputImage extends HttpServlet {
+public class ExampleUploadEndOutputImage extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/pages/TESTimageUploadForm.jsp").forward(request, response);
+        request.getRequestDispatcher("/TESTimageUploadForm.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
