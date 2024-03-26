@@ -27,11 +27,12 @@ public class User {
         this.id = id;
     }
 
-    public User(Long id, String name, String username, String password) {
+    public User(Long id, String name, String username, String password, byte[] profilePicture) {
         this.id = id;
         this.name = name;
         this.username = username;
         this.password = password;
+        this.profilePicture = profilePicture;
     }
 
     public User(Long id, String name, String username) {
@@ -67,8 +68,5 @@ public class User {
         if (field == null || field.isEmpty()) {
             throw new IllegalArgumentException(errorMessage);
         }
-    }
-    public void addPicture (Part filePart) throws IOException {
-        profilePicture = ImageUtil.convertToByteArray(filePart.getInputStream());
     }
 }

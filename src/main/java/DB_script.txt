@@ -3,8 +3,12 @@ create table subscribers
     id        bigserial
         constraint subscribers_pk
             primary key,
-    follower  integer not null,
+    follower  integer not null
+        constraint subscribers_user_account_id_fk
+            references user_account,
     subscribe integer not null
+        constraint subscribers_user_account_id_fk2
+            references user_account
 );
 
 alter table subscribers
@@ -17,7 +21,8 @@ create table user_account
             primary key,
     name     varchar                                         not null,
     username varchar                                         not null,
-    password varchar                                         not null
+    password varchar                                         not null,
+    avatar   bytea
 );
 
 alter table user_account

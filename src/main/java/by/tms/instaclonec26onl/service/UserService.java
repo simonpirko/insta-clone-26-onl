@@ -3,26 +3,34 @@ package by.tms.instaclonec26onl.service;
 import by.tms.instaclonec26onl.custom_exceptions.UserNotFoundException;
 import by.tms.instaclonec26onl.model.User;
 import by.tms.instaclonec26onl.storage.InMemoryUserStorage;
+import lombok.SneakyThrows;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 import java.util.List;
 
 public class UserService {
 
-    InMemoryUserStorage inMemoryUserStorage = new InMemoryUserStorage();
+    private final InMemoryUserStorage inMemoryUserStorage = new InMemoryUserStorage();
 
     // Сохранение в сторэдж
     public void add(User user) {
-        InMemoryUserStorage.save(user);
-    }
-    public void update(User user){
-        InMemoryUserStorage.update(user);
         inMemoryUserStorage.save(user);
     }
 
-    public void changeCreds (User user){
-        inMemoryUserStorage.changeCredsUser(user);
+    @SneakyThrows
+    public void updateAvatar(HttpServletRequest req, User user) {
+
+        Part part = req.getPart("photo");
+
+        byte[] postImgByte = ImageUtil.convertToByteArray(part.getInputStream());
+        user.setProfilePicture(postImgByte);
+
+        inMemoryUserStorage.updateAvatar(user);
+    }
+    public void update(User user){
+        inMemoryUserStorage.update(user);
     }
 
     // Поиск юзера в сторэдже по никнейму

@@ -33,11 +33,10 @@ public class ProfileServlet extends HttpServlet {
         List<UserPost> userPostReverse = postService.findAllPost(user);
         Collections.reverse(userPostReverse);
         req.setAttribute("post", userPostReverse);
-        req.setAttribute("username", user.getUsername());
-
-        //String base64Image = Base64.getEncoder().encodeToString(user.getProfilePicture());
-        //req.setAttribute("base64Image", base64Image);
-
+        if (user.getProfilePicture() != null) {
+            String base64Image = Base64.getEncoder().encodeToString(user.getProfilePicture());
+            req.setAttribute("base64Image", base64Image);
+        }
         RequestDispatcher dispatcher = req.getRequestDispatcher("/pages/profile.jsp");
         dispatcher.forward(req, resp);
     }

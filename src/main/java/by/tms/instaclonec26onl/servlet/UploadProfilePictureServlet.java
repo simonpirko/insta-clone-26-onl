@@ -2,6 +2,7 @@ package by.tms.instaclonec26onl.servlet;
 
 import by.tms.instaclonec26onl.model.User;
 import by.tms.instaclonec26onl.service.UserService;
+import lombok.SneakyThrows;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -14,14 +15,11 @@ import java.io.IOException;
 public class UploadProfilePictureServlet extends HttpServlet {
     UserService userService = new UserService();
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+    @SneakyThrows
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+        User user = userService.getCurrentUser(request);
 
-        Part filePart = request.getPart("photo");
-
-        user.addPicture(filePart);
-        userService.update(user);
+        userService.updateAvatar(request, user);
 
         response.sendRedirect("/profile");
     }

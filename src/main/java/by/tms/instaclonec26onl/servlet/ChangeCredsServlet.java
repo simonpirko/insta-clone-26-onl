@@ -14,15 +14,7 @@ import java.io.IOException;
 @WebServlet("/settings")
 public class ChangeCredsServlet extends HttpServlet {
 
-    private InMemoryUserStorage storage;
     private final UserService userService = new UserService();
-
-    public ChangeCredsServlet(InMemoryUserStorage storage) {
-        this.storage = storage;
-    }
-
-    public ChangeCredsServlet() {
-    }
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         getServletContext().
                 getRequestDispatcher("/pages/settings.jsp").

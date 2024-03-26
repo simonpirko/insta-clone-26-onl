@@ -1,8 +1,6 @@
 package by.tms.instaclonec26onl.storage;
 
 import by.tms.instaclonec26onl.model.User;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import lombok.SneakyThrows;
 import java.sql.*;
 import java.util.ArrayList;
@@ -10,20 +8,9 @@ import java.util.List;
 
 // Типа БД
 public class InMemoryUserStorage {
-    //private final static Map<String, User> users = new ConcurrentHashMap<>();
-    //private final static List<String> listUsername = new ArrayList<>();
-
-    // сохранение в Map
-    /*public static void save(User user) {
-        users.computeIfAbsent(user.getUsername(), k -> user);
-    }*/
 
     @SneakyThrows
     public List<User> findAllUser() {
-        /*List<User> list = users.values().stream().toList();
-        for (User user : list) {
-            listUsername.add(user.getUsername());
-        }*/
         Connection connection =
                 DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "root");
         connection.setAutoCommit(false);
@@ -69,10 +56,6 @@ public class InMemoryUserStorage {
 
     @SneakyThrows
     public User findUserByUsername(String username) {
-        /*User user = users.get(username);
-        if (user == null) {
-            throw new RuntimeException("User not found");
-        }*/
 
         Connection connection =
                 DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "root");
@@ -86,11 +69,12 @@ public class InMemoryUserStorage {
                 long id = resultSet.getLong(1);
                 String name = resultSet.getString(2);
                 String password = resultSet.getString(3);
+                byte[] avatar = resultSet.getBytes(5);
 
                 resultSet.close();
 
                 connection.commit();
-                return new User(id, name, username, password);
+                return new User(id, name, username, password, avatar);
             }
         }
 
@@ -131,7 +115,7 @@ public class InMemoryUserStorage {
     }
 
     @SneakyThrows
-    public void changeCredsUser (User user) {
+    public void update(User user) {
         Connection connection =
                 DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "root");
         connection.setAutoCommit(false);
@@ -144,15 +128,32 @@ public class InMemoryUserStorage {
 
         updateUser.executeUpdate();
 
+        updateUser.close();
+
+        connection.commit();
+    }
+
+    @SneakyThrows
+    public void updateAvatar(User user) {
+
+        Connection connection =
+                DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "root");
+        connection.setAutoCommit(false);
+
+        PreparedStatement updateUser = connection.prepareStatement("update user_account set avatar = ? where id = ?");
+
+        updateUser.setBytes(1, user.getProfilePicture());
+        updateUser.setLong(2, user.getId());
+
+        updateUser.executeUpdate();
+
+        updateUser.close();
+
         connection.commit();
 
     }
 
-    public static void update(User user) {
-        //users.put(user.getUsername(), user);
-    }
-
-    public static void delete(User user) {
+    public void delete(User user) {
         //users.remove(user.getUsername());
     }
 }
