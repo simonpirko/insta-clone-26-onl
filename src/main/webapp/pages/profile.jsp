@@ -8,7 +8,25 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/pages/style.css">
 </head>
+<body class="profile-body">
+<div class="content">
+    <div class="circle" id="imageContainer">
+        <img src="data:image/jpeg;base64,${base64Image}">
+    </div>
+    <div class="info">
+        <div class="b-links">
+            <a href="http://localhost:8080/subscription?username=${user.username}"class="button" > subscriptions </a>
+            <a href="http://localhost:8080/follower?username=${user.username}" class="button" > follower </a>
+            <a href="/search" class="button" >search</a>
+        </div>
+        <div class="bottom-info">
+            <h1>${user.name}</h1>
+            <a href="/settings" class="button">settings</a>
+        </div>
+    </div>
+</div>
 <body>
 <h1>${user.name}</h1>
 <a href="http://localhost:8080/subscription?username=${user.username}"> subscriptions </a>

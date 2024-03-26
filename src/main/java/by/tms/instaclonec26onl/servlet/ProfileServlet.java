@@ -1,5 +1,6 @@
 package by.tms.instaclonec26onl.servlet;
 
+import by.tms.instaclonec26onl.custom_exceptions.UserNotFoundException;
 import by.tms.instaclonec26onl.model.User;
 import by.tms.instaclonec26onl.model.UserPost;
 import by.tms.instaclonec26onl.service.PostService;
@@ -14,6 +15,8 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.io.InputStream;
+import java.util.Base64;
 
 // Сервлет для страницы профиля
 @WebServlet("/profile")
@@ -31,6 +34,10 @@ public class ProfileServlet extends HttpServlet {
         Collections.reverse(userPostReverse);
         req.setAttribute("post", userPostReverse);
         req.setAttribute("username", user.getUsername());
+
+        //String base64Image = Base64.getEncoder().encodeToString(user.getProfilePicture());
+        //req.setAttribute("base64Image", base64Image);
+
         RequestDispatcher dispatcher = req.getRequestDispatcher("/pages/profile.jsp");
         dispatcher.forward(req, resp);
     }

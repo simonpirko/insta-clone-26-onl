@@ -14,6 +14,10 @@ public class UserService {
 
     // Сохранение в сторэдж
     public void add(User user) {
+        InMemoryUserStorage.save(user);
+    }
+    public void update(User user){
+        InMemoryUserStorage.update(user);
         inMemoryUserStorage.save(user);
     }
 

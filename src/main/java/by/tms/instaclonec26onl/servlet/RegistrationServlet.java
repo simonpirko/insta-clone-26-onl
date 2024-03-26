@@ -43,7 +43,7 @@ public class RegistrationServlet extends HttpServlet {
             return;
         }
 
-        User user = new User(name, username, password, profilePictureUrl,new ArrayList<>(),new ArrayList<>());
+        User user = new User(name, username, password, profilePictureUrl.getBytes(),new ArrayList<>(),new ArrayList<>());
         user.setName(name);
         user.setUsername(username);
         user.setPassword(password);

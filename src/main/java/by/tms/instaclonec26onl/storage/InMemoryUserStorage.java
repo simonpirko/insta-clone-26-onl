@@ -1,7 +1,8 @@
 package by.tms.instaclonec26onl.storage;
 
-import by.tms.instaclonec26onl.custom_exceptions.UserNotFoundException;
 import by.tms.instaclonec26onl.model.User;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import lombok.SneakyThrows;
 import java.sql.*;
 import java.util.ArrayList;
@@ -147,6 +148,11 @@ public class InMemoryUserStorage {
 
     }
 
-    public void delete(User user) {
+    public static void update(User user) {
+        //users.put(user.getUsername(), user);
+    }
+
+    public static void delete(User user) {
+        //users.remove(user.getUsername());
     }
 }

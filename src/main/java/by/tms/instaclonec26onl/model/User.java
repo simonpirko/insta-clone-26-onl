@@ -1,9 +1,13 @@
 package by.tms.instaclonec26onl.model;
 
+import by.tms.instaclonec26onl.service.ImageUtil;
 import lombok.Data;
 import lombok.ToString;
 
 import java.util.List;
+
+import javax.servlet.http.Part;
+import java.io.IOException;
 
 @Data
 @ToString
@@ -14,7 +18,7 @@ public class User {
     private String name;
     private String username;
     private String password;
-    private String profilePicture;
+    private byte[] profilePicture;
     private List<String> subscription;
     private List<String> followers;
     private List<UserPost> userPostList;
@@ -46,7 +50,7 @@ public class User {
 
     // Если любое поле null или пустая строка то бросаем IllegalArgumentException (добавил константу сообщения для проверки, кастомное исключение можно удалить)
 
-    public User(String name, String username, String password, String profilePicture, List<String> subscription, List<String> followers) {
+    public User(String name, String username, String password, byte[] profilePicture, List<String> subscription, List<String> followers) {
         this.validateField(name, "name", EMPTY_FIELD_MESSAGE);
         this.validateField(username, "username", EMPTY_FIELD_MESSAGE);
         this.validateField(password, "password", EMPTY_FIELD_MESSAGE);
@@ -63,5 +67,8 @@ public class User {
         if (field == null || field.isEmpty()) {
             throw new IllegalArgumentException(errorMessage);
         }
+    }
+    public void addPicture (Part filePart) throws IOException {
+        profilePicture = ImageUtil.convertToByteArray(filePart.getInputStream());
     }
 }
