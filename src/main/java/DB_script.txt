@@ -1,0 +1,44 @@
+create table subscribers
+(
+    id        bigserial
+        constraint subscribers_pk
+            primary key,
+    follower  integer not null
+        constraint subscribers_user_account_id_fk
+            references user_account,
+    subscribe integer not null
+        constraint subscribers_user_account_id_fk2
+            references user_account
+);
+
+alter table subscribers
+    owner to postgres;
+
+create table user_account
+(
+    id       bigint default nextval('user_id_seq'::regclass) not null
+        constraint user_account_pk
+            primary key,
+    name     varchar                                         not null,
+    username varchar                                         not null,
+    password varchar                                         not null,
+    avatar   bytea
+);
+
+alter table user_account
+    owner to postgres;
+
+create table user_post
+(
+    id         bigserial
+        constraint user_post_pk
+            primary key,
+    image_post bytea   not null,
+    text_post  varchar not null,
+    autor_id   bigint  not null
+        constraint user_post_user_id_fk
+            references user_account
+);
+
+alter table user_post
+    owner to postgres;

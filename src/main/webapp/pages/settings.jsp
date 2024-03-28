@@ -7,7 +7,7 @@
 <body>
 <h1>Settings</h1>
 
-<form method="post" action="/settings">
+<form method="post" action="/settings" class="setting-form" >
     <label for="username">Username:</label>
     <input type="text" name="username" id="username" required/><br/>
     <label for="password">Password:</label>
@@ -24,7 +24,7 @@
 </c:if>
 
 <h2>Update Profile Picture</h2>
-<form id="uploadForm" method="post" action="/uploadProfilePicture" enctype="multipart/form-data">
+<form id="uploadForm" method="post" action="/uploadProfilePicture" enctype="multipart/form-data" class="setting-form">
     <input type="file" id="uploadInput" name="photo" accept="image/*">
     <input type="submit" value="Upload">
 </form>

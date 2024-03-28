@@ -26,7 +26,7 @@ public class UserLoginServlet extends HttpServlet {
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
 
-		User byUsername = userService.findByUsername(username);
+		User byUsername = userService.findUserByUsername(username);
 		if (byUsername.getPassword().equals(password)) {
 
 			req.getSession().setAttribute("user", byUsername);

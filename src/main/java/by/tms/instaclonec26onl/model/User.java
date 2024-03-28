@@ -14,12 +14,40 @@ import java.io.IOException;
 public class User {
     private static final String EMPTY_FIELD_MESSAGE = "Реклама пива запрещена, поэтому её здесь нет";
 
+    private Long id;
     private String name;
     private String username;
     private String password;
     private byte[] profilePicture;
     private List<String> subscription;
     private List<String> followers;
+    private List<UserPost> userPostList;
+
+    public User(Long id) {
+        this.id = id;
+    }
+
+    public User(Long id, String name, String username, String password, byte[] profilePicture) {
+        this.id = id;
+        this.name = name;
+        this.username = username;
+        this.password = password;
+        this.profilePicture = profilePicture;
+    }
+
+    public User(Long id, String name, String username) {
+        this.id = id;
+        this.name = name;
+        this.username = username;
+    }
+
+    public User(String name, String username) {
+        this.name = name;
+        this.username = username;
+    }
+
+    public User() {
+    }
 
     // Если любое поле null или пустая строка то бросаем IllegalArgumentException (добавил константу сообщения для проверки, кастомное исключение можно удалить)
 
@@ -40,8 +68,5 @@ public class User {
         if (field == null || field.isEmpty()) {
             throw new IllegalArgumentException(errorMessage);
         }
-    }
-    public void addPicture (Part filePart) throws IOException {
-        profilePicture = ImageUtil.convertToByteArray(filePart.getInputStream());
     }
 }

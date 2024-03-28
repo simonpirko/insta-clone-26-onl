@@ -1,6 +1,7 @@
 package by.tms.instaclonec26onl.servlet;
 
 import by.tms.instaclonec26onl.model.User;
+import by.tms.instaclonec26onl.service.SubscriptionService;
 import by.tms.instaclonec26onl.service.UserService;
 
 import javax.servlet.RequestDispatcher;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 @WebServlet("/registration")
 public class RegistrationServlet extends HttpServlet {
     private final UserService userService = new UserService();
+    private final SubscriptionService subscriptionService = new SubscriptionService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         getServletContext()
@@ -34,6 +36,11 @@ public class RegistrationServlet extends HttpServlet {
             RequestDispatcher dispatcher = req.getRequestDispatcher("/pages/registration.jsp");
             dispatcher.forward(req, resp);
             return;
+        } else if (username.equals(userService.findUserByUsername(username).getUsername())) {
+            req.setAttribute("message", "This user already exists");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/pages/home.jsp");
+            dispatcher.forward(req, resp);
+            return;
         }
 
         User user = new User(name, username, password, profilePictureUrl.getBytes(),new ArrayList<>(),new ArrayList<>());
@@ -43,8 +50,9 @@ public class RegistrationServlet extends HttpServlet {
 
         try {
             userService.add(user);
-            req.getSession().setAttribute("user", user);
-            resp.sendRedirect("/pages/profile.jsp");
+            User newUser = userService.findUserByUsername(username);
+            req.getSession().setAttribute("user", newUser);
+            resp.sendRedirect("/profile");
         } catch (IllegalArgumentException e) {
             req.setAttribute("message", e.getMessage());
             RequestDispatcher dispatcher = req.getRequestDispatcher("/pages/home.jsp");
