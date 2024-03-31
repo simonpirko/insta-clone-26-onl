@@ -10,6 +10,7 @@
 <html>
 <head>
     <title>Subscribers</title>
+    <link rel="stylesheet" type="text/css" href="/pages/style.css">
 </head>
 <body>
 <ul>

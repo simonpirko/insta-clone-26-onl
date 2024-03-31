@@ -2,10 +2,8 @@ package by.tms.instaclonec26onl.servlet;
 
 import by.tms.instaclonec26onl.model.User;
 import by.tms.instaclonec26onl.service.UserService;
-import by.tms.instaclonec26onl.storage.InMemoryUserStorage;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;

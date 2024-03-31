@@ -1,21 +1,16 @@
 package by.tms.instaclonec26onl.servlet;
 
-import by.tms.instaclonec26onl.custom_exceptions.UserNotFoundException;
 import by.tms.instaclonec26onl.model.User;
 import by.tms.instaclonec26onl.model.UserPost;
 import by.tms.instaclonec26onl.service.PostService;
 import by.tms.instaclonec26onl.service.UserService;
 import lombok.SneakyThrows;
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
-import java.io.IOException;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.io.InputStream;
 import java.util.Base64;
 
 // Сервлет для страницы профиля
@@ -35,7 +30,11 @@ public class ProfileServlet extends HttpServlet {
         req.setAttribute("post", userPostReverse);
         if (user.getProfilePicture() != null) {
             String base64Image = Base64.getEncoder().encodeToString(user.getProfilePicture());
-            req.setAttribute("base64Image", base64Image);
+            req.setAttribute("base64Avatar", base64Image);
+        }
+        if (user.getStories() != null){
+            String stories = Base64.getEncoder().encodeToString(user.getStories());
+            req.setAttribute("base64Stories", stories);
         }
         RequestDispatcher dispatcher = req.getRequestDispatcher("/pages/profile.jsp");
         dispatcher.forward(req, resp);

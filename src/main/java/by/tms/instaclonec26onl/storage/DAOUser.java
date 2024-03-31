@@ -6,8 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-// Типа БД
-public class InMemoryUserStorage {
+public class DAOUser {
 
     @SneakyThrows
     public List<User> findAllUser() {
@@ -156,4 +155,6 @@ public class InMemoryUserStorage {
     public void delete(User user) {
         //users.remove(user.getUsername());
     }
+
+
 }

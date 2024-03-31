@@ -5,13 +5,12 @@ import by.tms.instaclonec26onl.model.UserPost;
 import lombok.Data;
 import lombok.SneakyThrows;
 
-import javax.servlet.jsp.jstl.core.IteratedExpression;
 import java.sql.*;
 import java.util.*;
 import java.util.List;
 
 @Data
-public class InMemoryPostStorage {
+public class DAOPost {
 
     //private final Map<byte[], String> post = new HashMap<>();
 
@@ -19,7 +18,7 @@ public class InMemoryPostStorage {
         post.put(userPost.getImagePost(), userPost.getTextPost());
     }*/
 
-    public void save_DB (UserPost userPost)  {
+    public void save(UserPost userPost)  {
         try {
             Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "root");
             PreparedStatement preparedStatement = connection.prepareStatement("insert into user_post values (default, ?, ?, ?)");

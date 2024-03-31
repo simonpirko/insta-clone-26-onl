@@ -92,6 +92,21 @@ a:active {
 /*
 Стиль страницы профиля/админки
  */
+
+
+.add-image-button[onclick="openImageUploader()"] {
+    display: inline-flex; /* Используем flexbox для центрирования */
+    justify-content: center; /* Центрируем по горизонтали */
+    align-items: center; /* Центрируем по вертикали */
+    width: 40px; /* Ширина круглой кнопки */
+    height: 40px; /* Высота круглой кнопки */
+    border-radius: 50%; /* Создание круглой формы */
+    background-color: #ccc; /* Цвет фона */
+    color: #fff; /* Цвет текста */
+    text-decoration: none; /* Удаление стандартного подчёркивания */
+    font-size: 16px; /* Размер текста */
+}
+
 .profile-body {
     display: flex;
     flex-direction: column;
