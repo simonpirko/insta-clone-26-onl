@@ -75,6 +75,29 @@
                     <input type="hidden" name="idPost" value="${userPost.idPost}">
                 </form>
             </div>
+
+            <fieldset>
+                <form action="/comment" method="post">
+                    <input type="hidden" name="action" value="addComment">
+                    <input type="hidden" name="postId" value="${userPost.idPost}">
+                    <input type="text" name="comment" class="form-control" placeholder="Add comment">
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </form>
+
+                <c:forEach items="${allComment[userPost.idPost]}" var="comment">
+                <div class="text-center mt-3">
+                    <div>${comment}</div>
+                    <form action="/comment" method="post">
+                        <input type="hidden" name="action" value="deleteComment">
+                        <input type="hidden" name="commentId" value="${comment.id}">
+                        <button type="submit" class="btn btn-link btn-sm delete-btn">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </form>
+                    <br/>
+                </div>
+                </c:forEach>
+            </fieldset>
         </c:forEach>
     </div>
 </div>
