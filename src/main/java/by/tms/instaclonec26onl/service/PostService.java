@@ -2,18 +2,16 @@ package by.tms.instaclonec26onl.service;
 
 import by.tms.instaclonec26onl.model.User;
 import by.tms.instaclonec26onl.model.UserPost;
-import by.tms.instaclonec26onl.storage.InMemoryPostStorage;
+import by.tms.instaclonec26onl.storage.DAOPost;
 import lombok.SneakyThrows;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
-import java.sql.SQLException;
 import java.util.List;
 
 public class PostService {
 
-    private final InMemoryPostStorage inMemoryPostStorage = new InMemoryPostStorage();
+    private final DAOPost daoPost = new DAOPost();
 
     @SneakyThrows
     public UserPost addPostDB (HttpServletRequest req, User user) {
@@ -24,20 +22,20 @@ public class PostService {
 
         UserPost userPost = new UserPost(textPost, postImgByte, new User(user.getId()));
 
-        inMemoryPostStorage.save_DB(userPost);
+        daoPost.save(userPost);
         return userPost;
     }
 
     public List<UserPost> findAllPost (User user) {
-        return inMemoryPostStorage.findAllPostUser(user);
+        return daoPost.findAllPostUser(user);
     }
 
     public List<UserPost> findAllByAccountId (long id) {
-        return inMemoryPostStorage.findAllByAccountId(id);
+        return daoPost.findAllByAccountId(id);
     }
 
     public void deletePost(long userId){
-        inMemoryPostStorage.delete(userId);
+        daoPost.delete(userId);
     }
 
 }

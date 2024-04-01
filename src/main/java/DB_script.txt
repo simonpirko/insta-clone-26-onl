@@ -43,6 +43,19 @@ create table user_post
 alter table user_post
     owner to postgres;
 
+CREATE TABLE Stories
+(
+   story_id SERIAL PRIMARY KEY,
+   author_id BIGINT NOT NULL,
+   stories BYTEA NOT NULL,
+   CONSTRAINT fk_author
+      FOREIGN KEY (author_id)
+         REFERENCES user_account (id)
+);
+
+alter table Stories
+    owner to postgres;
+    
 create table public.comment (
   id bigint primary key not null default nextval('comment_id_seq'::regclass),
   comment character varying not null,
@@ -51,4 +64,3 @@ create table public.comment (
   foreign key (post_id) references public.user_post (id)
   match simple on update no action on delete no action
 );
-

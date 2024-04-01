@@ -1,13 +1,10 @@
 package by.tms.instaclonec26onl.model;
 
-import by.tms.instaclonec26onl.service.ImageUtil;
+
 import lombok.Data;
 import lombok.ToString;
 
 import java.util.List;
-
-import javax.servlet.http.Part;
-import java.io.IOException;
 
 @Data
 @ToString
@@ -22,6 +19,7 @@ public class User {
     private List<String> subscription;
     private List<String> followers;
     private List<UserPost> userPostList;
+    private byte[] stories;
 
     public User(Long id) {
         this.id = id;
@@ -69,4 +67,5 @@ public class User {
             throw new IllegalArgumentException(errorMessage);
         }
     }
+
 }

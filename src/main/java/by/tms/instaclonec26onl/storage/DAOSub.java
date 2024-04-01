@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InMemorySubStorage {
+public class DAOSub {
 
     private final UserService userService = new UserService();
 

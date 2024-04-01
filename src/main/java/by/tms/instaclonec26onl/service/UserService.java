@@ -2,44 +2,41 @@ package by.tms.instaclonec26onl.service;
 
 import by.tms.instaclonec26onl.custom_exceptions.UserNotFoundException;
 import by.tms.instaclonec26onl.model.User;
-import by.tms.instaclonec26onl.storage.InMemoryUserStorage;
+import by.tms.instaclonec26onl.storage.DAOStories;
+import by.tms.instaclonec26onl.storage.DAOUser;
 import lombok.SneakyThrows;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
 import java.util.List;
 
 public class UserService {
 
-    private final InMemoryUserStorage inMemoryUserStorage = new InMemoryUserStorage();
+    private final DAOUser daoUser = new DAOUser();
+    private final DAOStories daoStories = new DAOStories();
 
     // Сохранение в сторэдж
     public void add(User user) {
-        inMemoryUserStorage.save(user);
+        daoUser.save(user);
     }
 
     @SneakyThrows
-    public void updateAvatar(HttpServletRequest req, User user) {
+    public void updateAvatar(byte[] bytes, User user) {
 
-        Part part = req.getPart("photo");
-
-        byte[] postImgByte = ImageUtil.convertToByteArray(part.getInputStream());
-        user.setProfilePicture(postImgByte);
-
-        inMemoryUserStorage.updateAvatar(user);
+        user.setProfilePicture(bytes);
+        daoUser.updateAvatar(user);
     }
     public void update(User user){
-        inMemoryUserStorage.update(user);
+        daoUser.update(user);
     }
 
     // Поиск юзера в сторэдже по никнейму
     public User findUserByUsername(String username)  {
-        return inMemoryUserStorage.findUserByUsername(username);
+        return daoUser.findUserByUsername(username);
     }
 
     public User findUserById(long id) {
-        return inMemoryUserStorage.findUserById(id);
+        return daoUser.findUserById(id);
     }
 
     // Проверка сессии
@@ -50,6 +47,17 @@ public class UserService {
         return user;
     }
     public List<User> findAllUser() {
-        return inMemoryUserStorage.findAllUser();
+        return daoUser.findAllUser();
+    }
+
+    public void addStories(byte[] postImgByte, User user) {
+        user.setStories(postImgByte);
+        daoStories.addStories(user);
+    }
+    public void getStories(User user){
+        daoStories.getStories(user);
+    }
+    public void deleteStories(){
+        daoStories.deleteStories();
     }
 }

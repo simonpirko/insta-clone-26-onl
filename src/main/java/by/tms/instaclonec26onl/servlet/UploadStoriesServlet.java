@@ -7,22 +7,25 @@ import lombok.SneakyThrows;
 
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
-@WebServlet("/uploadProfilePicture")
+@WebServlet("/uploadStories")
 @MultipartConfig
-public class UploadProfilePictureServlet extends HttpServlet {
+public class UploadStoriesServlet extends HttpServlet {
     UserService userService = new UserService();
 
     @SneakyThrows
     protected void doPost(HttpServletRequest req, HttpServletResponse res) {
         User user = userService.getCurrentUser(req);
-        Part photo = req.getPart("photo");
+        Part photo = req.getPart("stories");
 
         byte[] postImgByte = ImageUtil.convertToByteArray(photo.getInputStream());
-        userService.updateAvatar(postImgByte, user);
+        userService.addStories(postImgByte, user);
 
         res.sendRedirect("/profile");
     }
-}
 
+}
