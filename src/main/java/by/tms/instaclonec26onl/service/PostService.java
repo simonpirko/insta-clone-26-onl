@@ -14,7 +14,7 @@ public class PostService {
     private final DAOPost daoPost = new DAOPost();
 
     @SneakyThrows
-    public void addPostDB (HttpServletRequest req, User user) {
+    public UserPost addPostDB (HttpServletRequest req, User user) {
         String textPost = req.getParameter("text");
         Part part = req.getPart("image");
 
@@ -23,6 +23,7 @@ public class PostService {
         UserPost userPost = new UserPost(textPost, postImgByte, new User(user.getId()));
 
         daoPost.save(userPost);
+        return userPost;
     }
 
     public List<UserPost> findAllPost (User user) {
