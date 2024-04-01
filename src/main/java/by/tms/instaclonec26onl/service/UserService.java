@@ -57,4 +57,7 @@ public class UserService {
     public void getStories(User user){
         daoStories.getStories(user);
     }
+    public void deleteStories(){
+        daoStories.deleteStories();
+    }
 }

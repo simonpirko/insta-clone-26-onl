@@ -28,15 +28,19 @@ public class ProfileServlet extends HttpServlet {
         List<UserPost> userPostReverse = postService.findAllPost(user);
         Collections.reverse(userPostReverse);
         req.setAttribute("post", userPostReverse);
-        userService.getStories(user);
+
         if (user.getProfilePicture() != null) {
             String base64Avatar = Base64.getEncoder().encodeToString(user.getProfilePicture());
             req.setAttribute("base64Avatar", base64Avatar);
         }
-        if (user.getStories() != null){
+        if (user.getStories() == null) {
+            userService.getStories(user);
+        }
+        else {
             String base64Stories = Base64.getEncoder().encodeToString(user.getStories());
             req.setAttribute("base64Stories", base64Stories);
         }
+        userService.deleteStories();
         RequestDispatcher dispatcher = req.getRequestDispatcher("/pages/profile.jsp");
         dispatcher.forward(req, resp);
     }
