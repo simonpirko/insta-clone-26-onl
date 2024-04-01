@@ -28,6 +28,7 @@ public class ProfileServlet extends HttpServlet {
         List<UserPost> userPostReverse = postService.findAllPost(user);
         Collections.reverse(userPostReverse);
         req.setAttribute("post", userPostReverse);
+        userService.getStories(user);
         if (user.getProfilePicture() != null) {
             String base64Avatar = Base64.getEncoder().encodeToString(user.getProfilePicture());
             req.setAttribute("base64Avatar", base64Avatar);

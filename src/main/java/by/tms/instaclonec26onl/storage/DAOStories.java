@@ -3,9 +3,7 @@ package by.tms.instaclonec26onl.storage;
 import by.tms.instaclonec26onl.model.User;
 import lombok.SneakyThrows;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+import java.sql.*;
 
 public class DAOStories {
 
@@ -24,5 +22,23 @@ public class DAOStories {
         addStories.close();
 
         connection.commit();
+    }
+    @SneakyThrows
+    public void getStories(User user) {
+        Connection connection =
+                DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "root");
+        connection.setAutoCommit(false);
+
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("select * from stories");
+
+        while (resultSet.next()){
+            if (resultSet.getLong(2) == user.getId()) {
+                user.setStories(resultSet.getBytes(3));
+
+            }
+           // resultSet.close(); (если закрыть, не запускается сервлет)
+            connection.commit();
+        }
     }
 }

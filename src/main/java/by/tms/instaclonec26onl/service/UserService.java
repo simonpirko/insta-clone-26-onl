@@ -54,4 +54,7 @@ public class UserService {
         user.setStories(postImgByte);
         daoStories.addStories(user);
     }
+    public void getStories(User user){
+        daoStories.getStories(user);
+    }
 }

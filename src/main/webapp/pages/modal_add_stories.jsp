@@ -3,10 +3,8 @@
 <head>
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="/pages/style_modal.css">
-
 </head>
 <body>
-
 <div id="imageModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
@@ -16,6 +14,5 @@
         </form>
     </div>
 </div>
-
 </body>
 </html>

@@ -3,6 +3,7 @@
 <head>
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="/pages/style_modal.css">
+    <script src="/pages/script.js"></script>
 </head>
 <body>
 <div id="StoriesModal" class="modal">
