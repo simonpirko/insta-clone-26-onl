@@ -31,4 +31,8 @@ public class UserPost {
 
     public UserPost() {
     }
+
+    public UserPost(long idPost) {
+        this.idPost = idPost;
+    }
 }
