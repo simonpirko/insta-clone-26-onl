@@ -92,9 +92,7 @@ a:active {
 /*
 Стиль страницы профиля/админки
  */
-
-
-.add-image-button[onclick="openImageUploader()"] {
+.addImageButton[class="add-image-button circle"] {
     display: inline-flex; /* Используем flexbox для центрирования */
     justify-content: center; /* Центрируем по горизонтали */
     align-items: center; /* Центрируем по вертикали */

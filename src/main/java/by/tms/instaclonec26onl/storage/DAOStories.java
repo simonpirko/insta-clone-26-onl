@@ -1,7 +1,6 @@
 package by.tms.instaclonec26onl.storage;
 
 import by.tms.instaclonec26onl.model.User;
-import by.tms.instaclonec26onl.service.UserService;
 import lombok.SneakyThrows;
 
 import java.sql.Connection;
@@ -9,7 +8,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
 public class DAOStories {
-    private final UserService userService = new UserService();
+
     @SneakyThrows
     public void addStories(User user) {
         Connection connection =
