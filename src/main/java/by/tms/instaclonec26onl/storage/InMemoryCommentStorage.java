@@ -3,6 +3,7 @@ package by.tms.instaclonec26onl.storage;
 import by.tms.instaclonec26onl.model.Comment;
 import by.tms.instaclonec26onl.model.User;
 import by.tms.instaclonec26onl.model.UserPost;
+import by.tms.instaclonec26onl.model.UserVideoPost;
 import lombok.SneakyThrows;
 
 import java.sql.*;
@@ -51,6 +52,7 @@ public class InMemoryCommentStorage {
         return comments;
 
     }
+
 
     @SneakyThrows
     public List<Comment> findAllComment(UserPost userPost) {

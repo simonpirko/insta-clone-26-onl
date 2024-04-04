@@ -105,6 +105,65 @@
                 </c:forEach>
             </fieldset>
         </c:forEach>
+
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#videoPostModal">
+            Create Video Post
+        </button>
+
+        <!-- Modal -->
+        <form action="/addVideoPost" method="post" enctype="multipart/form-data">
+            <div class="modal fade" id="videoPostModal" tabindex="-1" aria-labelledby="videoPostModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="videoPostModalLabel">Create Video Post</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form >
+                                <div class="mb-3">
+                                    <label for="title" class="form-label">Title</label>
+                                    <input type="text" class="form-control" name="title" id="title" aria-describedby="nameHelp">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">Description</label>
+                                    <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="video" class="form-label">Multiple files input example</label>
+                                    <input class="form-control" type="file" name="video" id="video" multiple>
+
+                                </div>
+
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+
+                            <button type="submit" class="btn btn-primary w-100">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="videoPost">
+
+            <c:forEach var="userVideoPost" items="${video}">
+                <div class="text-center mt-3">
+                    <c:set var="videoByte" value="${Base64.getEncoder().encodeToString(userVideoPost.video)}" />
+                    <video src="data:video/mp4;base64,${videoByte}" class="video-fluid" width="30%" height="40%"  type="video/mp4"></video>
+                    <h4 class="mt-3"> ${user.username} :${userVideoPost.title}</h4>
+                    <p class="mt-3">${user.username} : ${userVideoPost.description}</p>
+                    <form method="post" action="/deleteVideoPost" class="clear-form-fields" name="button-delete">
+                        <input type="submit" value="Delete" class="btn btn-primary d-block mx-auto">
+                        <input type="hidden" name="id" value="${userVideoPost.id}">
+                    </form>
+                </div>
+
+            </c:forEach>
+        </div>
     </div>
 </div>
 </body>
