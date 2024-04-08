@@ -3,6 +3,7 @@ package by.tms.instaclonec26onl.service;
 import by.tms.instaclonec26onl.model.Comment;
 import by.tms.instaclonec26onl.model.User;
 import by.tms.instaclonec26onl.model.UserPost;
+import by.tms.instaclonec26onl.model.UserVideoPost;
 import by.tms.instaclonec26onl.storage.InMemoryCommentStorage;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +24,7 @@ public class CommentService {
     public List<Comment> findAllComment(UserPost userPost) {
         return storage.findAllByPostId(userPost.getIdPost());
     }
+
 
     public void deleteComment(Long commentId){
         storage.deleteComment(commentId);

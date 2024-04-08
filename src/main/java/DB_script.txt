@@ -64,3 +64,18 @@ create table public.comment (
   foreign key (post_id) references public.user_post (id)
   match simple on update no action on delete no action
 );
+create table user_video_post
+(
+    id          bigserial
+        constraint user_video_post_pk
+            primary key,
+    video       bytea   not null,
+    title       varchar not null,
+    description varchar not null,
+    author_id   bigint  not null
+        constraint user_video_post_user_account_id_fk
+            references user_account
+);
+
+alter table user_video_post
+    owner to postgres;

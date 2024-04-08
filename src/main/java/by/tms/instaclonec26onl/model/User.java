@@ -20,6 +20,7 @@ public class User {
     private List<String> followers;
     private List<UserPost> userPostList;
     private byte[] stories;
+    private List<UserVideoPost> userVideoPostList;
 
     public User(Long id) {
         this.id = id;
