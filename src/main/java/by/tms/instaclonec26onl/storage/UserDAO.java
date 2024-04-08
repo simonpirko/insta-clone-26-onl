@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DAOUser {
+public class UserDAO {
 
     @SneakyThrows
     public List<User> findAllUser() {

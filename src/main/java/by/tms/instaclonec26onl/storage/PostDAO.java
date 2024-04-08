@@ -10,7 +10,7 @@ import java.util.*;
 import java.util.List;
 
 @Data
-public class DAOPost {
+public class PostDAO {
 
     //private final Map<byte[], String> post = new HashMap<>();
 

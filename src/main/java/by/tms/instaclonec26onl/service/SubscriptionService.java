@@ -1,13 +1,13 @@
 package by.tms.instaclonec26onl.service;
 
 import by.tms.instaclonec26onl.model.User;
-import by.tms.instaclonec26onl.storage.DAOSub;
+import by.tms.instaclonec26onl.storage.SubscriberDAO;
 
 import java.util.List;
 
 public class SubscriptionService {
 
-    private final DAOSub daoSub = new DAOSub();
+    private final SubscriberDAO daoSub = new SubscriberDAO();
 
     public void addSubscribeUser(User fol, User sub) {
         daoSub.addUserSub(fol, sub);

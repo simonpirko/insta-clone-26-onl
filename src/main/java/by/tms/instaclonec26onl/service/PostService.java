@@ -2,7 +2,7 @@ package by.tms.instaclonec26onl.service;
 
 import by.tms.instaclonec26onl.model.User;
 import by.tms.instaclonec26onl.model.UserPost;
-import by.tms.instaclonec26onl.storage.DAOPost;
+import by.tms.instaclonec26onl.storage.PostDAO;
 import lombok.SneakyThrows;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +11,7 @@ import java.util.List;
 
 public class PostService {
 
-    private final DAOPost daoPost = new DAOPost();
+    private final PostDAO daoPost = new PostDAO();
 
     @SneakyThrows
     public UserPost addPostDB (HttpServletRequest req, User user) {

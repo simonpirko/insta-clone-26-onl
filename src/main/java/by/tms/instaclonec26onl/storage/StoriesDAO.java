@@ -5,7 +5,7 @@ import lombok.SneakyThrows;
 
 import java.sql.*;
 
-public class DAOStories {
+public class StoriesDAO {
 
     @SneakyThrows
     public void addStories(User user) {
@@ -19,10 +19,8 @@ public class DAOStories {
         addStories.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
 
         addStories.executeUpdate();
-
-        addStories.close();
-
         connection.commit();
+        addStories.close();
     }
     @SneakyThrows
     public void getStories(User user) {
@@ -37,8 +35,9 @@ public class DAOStories {
             if (resultSet.getLong(2) == user.getId()) {
                 user.setStories(resultSet.getBytes(3));
             }
-            //resultSet.close(); (если закрыть, не запускается сервлет)
+
             connection.commit();
+            statement.close();
         }
     }
     @SneakyThrows
@@ -50,8 +49,7 @@ public class DAOStories {
         Statement statement = connection.createStatement();
         statement.executeUpdate("DELETE FROM Stories WHERE time < (CURRENT_TIMESTAMP - interval '10 hours')");
 
-        //resultSet.close(); (если закрыть, не запускается сервлет)
-
         connection.commit();
+        statement.close();
     }
 }

@@ -2,8 +2,8 @@ package by.tms.instaclonec26onl.service;
 
 import by.tms.instaclonec26onl.custom_exceptions.UserNotFoundException;
 import by.tms.instaclonec26onl.model.User;
-import by.tms.instaclonec26onl.storage.DAOStories;
-import by.tms.instaclonec26onl.storage.DAOUser;
+import by.tms.instaclonec26onl.storage.StoriesDAO;
+import by.tms.instaclonec26onl.storage.UserDAO;
 import lombok.SneakyThrows;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,8 +12,8 @@ import java.util.List;
 
 public class UserService {
 
-    private final DAOUser daoUser = new DAOUser();
-    private final DAOStories daoStories = new DAOStories();
+    private final UserDAO daoUser = new UserDAO();
+    private final StoriesDAO daoStories = new StoriesDAO();
 
     // Сохранение в сторэдж
     public void add(User user) {

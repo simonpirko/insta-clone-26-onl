@@ -3,7 +3,7 @@ package by.tms.instaclonec26onl.service;
 
 import by.tms.instaclonec26onl.model.User;
 import by.tms.instaclonec26onl.model.UserVideoPost;
-import by.tms.instaclonec26onl.storage.DAOVideoPost;
+import by.tms.instaclonec26onl.storage.VideoPostDAO;
 import lombok.SneakyThrows;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +11,7 @@ import javax.servlet.http.Part;
 import java.util.List;
 
 public class VideoService {
-    private final DAOVideoPost daoVideoPost = new DAOVideoPost();
+    private final VideoPostDAO daoVideoPost = new VideoPostDAO();
     @SneakyThrows
     public UserVideoPost addVideoPostDB(HttpServletRequest request, User user){
         String title = request.getParameter("title");

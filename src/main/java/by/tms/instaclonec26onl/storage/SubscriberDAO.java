@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DAOSub {
+public class SubscriberDAO {
 
     private final UserService userService = new UserService();
 

@@ -48,6 +48,7 @@ CREATE TABLE Stories
    story_id SERIAL PRIMARY KEY,
    author_id BIGINT NOT NULL,
    stories BYTEA NOT NULL,
+   time timestamp NOT NULL,
    CONSTRAINT fk_author
       FOREIGN KEY (author_id)
          REFERENCES user_account (id)

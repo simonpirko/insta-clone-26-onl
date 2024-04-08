@@ -9,7 +9,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 @Data
-public class DAOVideoPost {
+public class VideoPostDAO {
     public void save(UserVideoPost userPost)  {
         try {
             Class.forName("org.postgresql.Driver");
