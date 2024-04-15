@@ -37,6 +37,7 @@
         </div>
         <div class="bottom-info">
             <h1>${user.name}</h1>
+            <a href="/news" class="button">News</a>
             <a href="/settings" class="button">settings</a>
         </div>
     </div>
